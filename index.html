@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mariia Mukhina Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#FAFAFC; --surface:#FFFFFF; --ink:#101318; --muted:#555C69; --faint:#8A909C; --rule:#E6E7EE;
+  --accent:#5B45F5; --accent-ink:#FFFFFF; --lav:#ECE9FF; --lav2:#D9D3FF;
+  --g1:#DCD6FF; --g2:#FFDCEC; --g3:#F2FFB5; --g4:#CFF3E3; --g0:#FFFFFF;
+  --t1:#E4F2EA; --t1i:#1F7A4D; --t2:#FFF1DB; --t2i:#8A5A00;
+  --shadow:0 18px 40px rgba(16,19,24,.07),0 3px 10px rgba(16,19,24,.04);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){color-scheme:dark;
+    --bg:#111217; --surface:#1A1C23; --ink:#ECEDF2; --muted:#A5ABB8; --faint:#7E8594; --rule:#2A2E38;
+    --accent:#9D8CFF; --accent-ink:#111217; --lav:#262147; --lav2:#3A3270;
+    --g1:#2A2350; --g2:#3A1F2E; --g3:#2A2F12; --g4:#15302A; --g0:#15161C;
+    --t1:#17291F; --t1i:#6CC596; --t2:#2E2715; --t2i:#E0B75A; --shadow:0 18px 40px rgba(0,0,0,.4);}
+}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#111217; --surface:#1A1C23; --ink:#ECEDF2; --muted:#A5ABB8; --faint:#7E8594; --rule:#2A2E38;
+  --accent:#9D8CFF; --accent-ink:#111217; --lav:#262147; --lav2:#3A3270;
+  --g1:#2A2350; --g2:#3A1F2E; --g3:#2A2F12; --g4:#15302A; --g0:#15161C;
+  --t1:#17291F; --t1i:#6CC596; --t2:#2E2715; --t2i:#E0B75A; --shadow:0 18px 40px rgba(0,0,0,.4);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;margin:0}
+h1,h2,h3{margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px}
+
+/* header */
+.hero{background:radial-gradient(50% 90% at 4% 0%,var(--g1) 0%,transparent 70%),radial-gradient(45% 80% at 98% 0%,var(--g2) 0%,transparent 70%),radial-gradient(50% 90% at 92% 100%,var(--g3) 0%,transparent 70%),radial-gradient(45% 80% at 0% 100%,var(--g4) 0%,transparent 70%),var(--g0);border-bottom:1px solid var(--rule)}
+.hero .wrap{padding-block:56px 40px;display:flex;flex-direction:column;gap:18px}
+.name{font-size:15px;font-weight:600;color:var(--muted);letter-spacing:.02em}
+.hero h1{font-size:clamp(32px,5vw,54px);font-weight:800;letter-spacing:-.025em;max-width:24ch}
+.hero .lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:58ch}
+.contact{display:flex;gap:10px;flex-wrap:wrap;font-size:14px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--rule);border-radius:999px;padding:6px 12px;color:var(--ink);text-decoration:none}
+.copy{border:0;background:none;color:var(--accent);font:inherit;font-size:13px;cursor:pointer;padding:0}
+
+
+/* photo + contact card */
+.hero-in{display:grid!important;grid-template-columns:1fr auto;align-items:center;gap:32px}
+.hero-text{display:flex;flex-direction:column;gap:18px}
+.me{border:0;background:none;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;font:inherit;color:var(--accent);font-weight:600;font-size:14px}
+.me img{width:160px;height:160px;border-radius:50%;object-fit:cover;border:4px solid var(--surface);box-shadow:var(--shadow);transition:transform .2s}
+.me:hover img{transform:scale(1.03)}
+.card-me{border:0;border-radius:20px;padding:28px;width:min(360px,calc(100vw - 32px));background:var(--surface);color:var(--ink);box-shadow:0 30px 80px rgba(16,19,24,.25);text-align:center}
+.card-me::backdrop{background:rgba(16,19,24,.4)}
+.card-me img{width:96px;height:96px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block}
+.card-me h2{font-size:22px;font-weight:800}
+.card-me .role{color:var(--muted);font-size:14px;margin-top:4px}
+.card-me .rows{margin-top:18px;display:flex;flex-direction:column;border-top:1px solid var(--rule);text-align:left}
+.card-me .r{display:grid;grid-template-columns:72px 1fr auto;gap:8px;align-items:center;padding:12px 0;border-bottom:1px solid var(--rule);font-size:14px;word-break:break-all}
+.card-me .k{color:var(--faint);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.card-me .x{position:absolute;top:10px;right:12px;border:0;background:none;font-size:26px;line-height:1;color:var(--faint);cursor:pointer}
+@media (max-width:640px){.hero-in{grid-template-columns:1fr}.me{order:-1;align-items:flex-start}.me img{width:104px;height:104px}}
+
+/* tabs */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:4;background:var(--surface);border-bottom:1px solid var(--rule)}
+.tabs .wrap{display:flex;gap:4px;overflow-x:auto}
+.tabs a{padding:16px 14px;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px;border-bottom:2.5px solid transparent;white-space:nowrap}
+.tabs a:hover{color:var(--ink)}
+.tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+section.tab{padding-block:44px 80px;display:flex;flex-direction:column;gap:28px}
+.sec-h{display:flex;flex-direction:column;gap:8px}
+.sec-h h2{font-size:clamp(26px,3.4vw,34px);font-weight:800;letter-spacing:-.02em}
+.sec-h p{color:var(--muted);max-width:62ch}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.proj{background:var(--surface);border:1px solid var(--rule);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{aspect-ratio:16/9;max-width:100%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.t-api{background:#0F1320;color:#CFD3DC;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace;padding:18px;align-items:flex-start;justify-content:flex-start}
+.t-api .k{color:#9D8CFF}.t-api .s{color:#8FD6A8}.t-api .c{color:#6B7285}
+.t-sb{background:var(--lav);gap:8px;padding:18px}
+.frame{flex:1;height:70%;border-radius:8px;background:#1E1E1E;position:relative;box-shadow:var(--shadow)}
+.frame::before{content:"";position:absolute;left:0;top:0;bottom:0;width:18%;background:#252526;border-radius:8px 0 0 8px}
+.frame::after{content:"";position:absolute;left:24%;right:10%;top:30%;height:8px;border-radius:4px;background:#81B88B;opacity:.7;box-shadow:0 16px 0 #81B88B,0 32px 0 rgba(204,204,204,.35)}
+.pbody{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.kind{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.proj h3{font-size:21px;font-weight:700;letter-spacing:-.01em}
+.proj p{color:var(--muted);font-size:15px}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+.tools span{font-size:12px;background:var(--lav);color:var(--ink);border-radius:999px;padding:3px 9px;font-weight:500}
+.status{font-size:12px;font-weight:600;border-radius:999px;padding:3px 9px;align-self:flex-start}
+.status.live{background:var(--t1);color:var(--t1i)} .status.wip{background:var(--t2);color:var(--t2i)}
+.plinks{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:9px 16px;font-weight:600;font-size:14px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+details.case{border-top:1px solid var(--rule);padding-top:10px}
+details.case summary{cursor:pointer;font-weight:600;font-size:14px}
+details.case dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:10px 0 0;font-size:14px}
+details.case dt{color:var(--faint);font-weight:600}
+details.case dd{margin:0;color:var(--muted)}
+
+/* process */
+.proc{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;counter-reset:s}
+.step{background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:20px;display:flex;gap:16px}
+.step .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px;font-variant-numeric:tabular-nums}
+.step h3{font-size:17px;margin-bottom:4px}
+.step p{font-size:15px;color:var(--muted)}
+.step .ex{font-size:13px;color:var(--faint);margin-top:8px}
+.models{overflow-x:auto;border:1px solid var(--rule);border-radius:16px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600}
+td b{color:var(--ink)} td{color:var(--muted)}
+tr:last-child td{border-bottom:0}
+.ai{background:var(--lav);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:8px;max-width:760px}
+.ai h3{font-size:18px}
+
+/* figma */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.fig{display:flex;flex-direction:column;gap:10px}
+.shot{aspect-ratio:4/3;max-width:100%;border-radius:14px;border:1px solid var(--rule);background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.ph{position:absolute;bottom:8px;left:8px;font-size:11px;background:var(--surface);color:var(--faint);border:1px solid var(--rule);border-radius:999px;padding:2px 8px}
+.fig h3{font-size:16px}
+.fig p{font-size:14px;color:var(--muted)}
+.mini-aid{width:52%;aspect-ratio:210/297;background:var(--surface);box-shadow:var(--shadow);border-top:3px solid var(--accent);border-radius:4px;padding:8%;display:flex;flex-direction:column;gap:5%}
+.mini-aid i{display:block;height:6%;border-radius:3px;background:var(--lav)}
+.mini-aid i.t{background:var(--accent);width:60%;height:7%}
+.mini-aid .g{display:grid;grid-template-columns:1fr 1fr;gap:6%;flex:1}
+.mini-aid .g i{height:auto}
+.mini-anat{width:84%;display:flex;flex-direction:column;gap:6px}
+.mini-anat div{display:flex;gap:6px;align-items:center;background:var(--lav);border-radius:6px;padding:6px}
+.mini-anat b{width:14px;height:14px;border-radius:50%;background:var(--accent);flex:none}
+.mini-anat span{height:6px;border-radius:3px;background:var(--lav2);flex:1}
+.mini-hey{width:86%;aspect-ratio:16/9;background:var(--bg);border-radius:8px;position:relative;box-shadow:var(--shadow)}
+.mini-hey .c{position:absolute;left:5%;bottom:7%;width:22%;aspect-ratio:1;border-radius:50%;background:var(--lav2)}
+.mini-hey .r{position:absolute;top:22%;left:8%;right:8%;display:grid;grid-template-columns:repeat(4,1fr);gap:4%}
+.mini-hey .r i{aspect-ratio:3/2;border:1.5px dashed var(--lav2);border-radius:5px}
+.mini-hey .cap{position:absolute;bottom:10%;left:40%;width:28%;height:8%;background:#101318;border-radius:2px}
+.mini-cards{width:84%;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.mini-cards i{aspect-ratio:3/4;border-radius:8px;background:var(--lav);border:1px solid var(--lav2)}
+
+
+.fig{margin:0}
+.shot.zoom{padding:0;cursor:zoom-in;font:inherit;width:100%;background:var(--surface)}
+.shot.zoom img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .25s;padding:10px}
+.shot.zoom.top img{object-fit:cover;object-position:top;padding:0}
+.shot.zoom.dark{background:#1E1E1E}
+.shot.zoom[data-full="fig/heygen.jpg"]{background:#ECE9FF}
+.shot.zoom[data-full="fig/api-pipeline.jpg"]{background:#1A1521}
+.shot.zoom:hover img{transform:scale(1.03)}
+.lightbox{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);max-height:92vh}
+.lightbox::backdrop{background:rgba(16,19,24,.8)}
+.lightbox img{display:block;max-width:100%;max-height:88vh;border-radius:12px;background:#fff}
+.lightbox .x{position:fixed;top:14px;right:18px;border:0;background:rgba(255,255,255,.9);border-radius:50%;width:40px;height:40px;font-size:26px;line-height:1;cursor:pointer}
+
+/* education */
+.edu{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.panel h3{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.list{display:flex;flex-direction:column}
+.li{display:grid;grid-template-columns:1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.li:last-child{border-bottom:0}
+.li small{display:block;color:var(--faint);font-size:13px}
+.li .d{color:var(--faint);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.skillgroup{display:flex;flex-direction:column;gap:8px}
+.skillgroup b{font-size:15px}
+.skills{display:flex;flex-wrap:wrap;gap:6px}
+.skills span{font-size:13px;border:1px solid var(--rule);border-radius:999px;padding:4px 10px;color:var(--ink);background:var(--bg)}
+.lang{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.lang div{border-top:2px solid var(--accent);padding-top:8px;font-size:14px}
+.lang small{display:block;color:var(--faint)}
+
+
+/* case study */
+.evidence{margin:0}.evidence img{width:100%;border-radius:12px;border:1px solid var(--rule);display:block}
+.back{font-size:14px;font-weight:600;text-decoration:none;align-self:flex-start}
+.case-hero{display:flex;flex-direction:column;gap:12px}
+.case-hero h2{font-size:clamp(30px,4.4vw,46px);font-weight:800;letter-spacing:-.025em}
+.lead2{font-size:clamp(17px,2vw,19px);color:var(--muted);max-width:60ch}
+.glance{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:16px;overflow:hidden}
+.glance div{background:var(--surface);padding:16px 18px;font-size:14px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.glance b{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.case-body{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start}
+.case-nav{position:sticky;top:76px;display:flex;flex-direction:column;gap:2px}
+.case-nav a{font-size:14px;color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:8px}
+.case-nav a:hover{background:var(--lav);color:var(--ink)}
+.case-content{display:flex;flex-direction:column;gap:44px;min-width:0;max-width:760px}
+.cs{display:flex;flex-direction:column;gap:14px;scroll-margin-top:76px}
+.cs h3{font-size:22px;font-weight:700;letter-spacing:-.01em;margin-top:6px}
+.cs h4{font-size:16px;font-weight:700;margin-top:6px}
+.cs p{color:var(--muted);max-width:66ch}
+.cs p b{color:var(--ink)}
+.step-k{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border-top:2px solid var(--accent);padding-top:10px;align-self:flex-start}
+.persona{background:var(--lav);border-radius:14px;padding:16px 18px;color:var(--ink)!important}
+.ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;color:var(--muted)}
+.ul b{color:var(--ink)}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:14px;background:var(--surface)}
+.tbl table{min-width:520px}
+.days5{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.days5 div{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:12px;font-size:14px;display:flex;flex-direction:column;gap:4px}
+.days5 b{color:var(--accent);font-size:13px}
+.dec{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dec div{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.dec b{font-size:16px}
+.dec p{font-size:15px}
+@media (max-width:900px){.case-body{grid-template-columns:1fr}.case-nav{position:static;flex-direction:row;flex-wrap:wrap}.glance{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.glance,.dec{grid-template-columns:1fr}.days5{grid-template-columns:1fr 1fr}}
+
+footer{border-top:1px solid var(--rule);padding-block:24px;color:var(--faint);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:900px){.projects,.gallery{grid-template-columns:1fr 1fr}.edu{grid-template-columns:1fr}}
+@media (max-width:640px){.projects,.gallery,.proc{grid-template-columns:1fr}.lang{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-text">
+      <div class="name">Mariia Mukhina · Instructional & Learning Experience Designer</div>
+      <h1>Learning design for technical products and AI tools</h1>
+      <p class="lead">Courses, storyboards and interactive practice for developers and technical teams. Grounded in learning science, built on real product data and reviewed by subject-matter experts.</p>
+    </div>
+    <button class="me" id="meBtn" type="button" aria-haspopup="dialog" aria-controls="meCard">
+      <img src="photo.jpg" alt="Mariia Mukhina" width="160" height="160">
+      <span>Contact me</span>
+    </button>
+  </div>
+</header>
+
+<dialog class="card-me" id="meCard" aria-labelledby="meName">
+  <button class="x" id="meClose" type="button" aria-label="Close">×</button>
+  <img src="photo.jpg" alt="" width="96" height="96">
+  <h2 id="meName">Mariia Mukhina</h2>
+  <p class="role">Instructional & Learning Experience Designer</p>
+  <div class="rows">
+    <div class="r"><span class="k">Email</span><span id="mail">mariiamukhina@icloud.com</span><button class="copy" id="copyMail" type="button">Copy</button></div>
+    <div class="r"><span class="k">LinkedIn</span><a id="liLink" href="https://www.linkedin.com/in/mariia-mukhina" target="_blank" rel="noopener">Open profile ↗</a></div>
+  </div>
+</dialog>
+
+<nav class="tabs" aria-label="Portfolio sections">
+  <div class="wrap">
+    <a href="#work" data-t="work">Work</a>
+    <a href="#process" data-t="process">How I design</a>
+    <a href="#figma" data-t="figma">Visual design</a>
+    <a href="#education" data-t="education">Education & skills</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- WORK -->
+<section class="tab" id="work" data-tab>
+  <div class="sec-h"><h2>Selected work</h2><p>Three projects on AI and developer tools. Each one opens in the browser, no sign-up needed.</p></div>
+  <div class="projects">
+
+    <article class="proj">
+      <div class="thumb t-api" aria-hidden="true"><div><span class="c"># Your first inference request</span><br><span class="k">from</span> openai <span class="k">import</span> OpenAI<br>client = OpenAI(<br>&nbsp;&nbsp;base_url=<span class="s">"…tokenfactory…/v1/"</span>,<br>&nbsp;&nbsp;api_key=os.environ[<span class="s">"NEBIUS_API_KEY"</span>])<br><span class="c"># finish_reason: "stop" · 60 tokens</span></div></div>
+      <div class="pbody">
+        <span class="kind">E-learning course · Developers</span>
+        <h3>Your First Inference Request</h3>
+        <p>Takes a developer from zero to a first working API call to Nebius Token Factory, then teaches them to read and change the response.</p>
+        <span class="status live">Live · tested in SCORM Cloud · developer-reviewed</span>
+        <div class="tools"><span>Rise 360</span><span>Supademo</span><span>Figma</span><span>Python</span><span>xAPI</span></div>
+        <div class="plinks"><a class="btn" href="#case-api">Read case study</a><a class="btn ghost" href="https://5famder.github.io/api-course/">Open course</a></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="thumb t-sb" aria-hidden="true"><div class="frame"></div><div class="frame"></div><div class="frame"></div></div>
+      <div class="pbody">
+        <span class="kind">Storyboard · Junior developers</span>
+        <h3>Git Commit Message Generator</h3>
+        <p>A 4-minute interactive lesson on using an AI tool to write commit messages, and checking what it gets wrong.</p>
+        <span class="status live">Live · in expert review</span>
+        <div class="tools"><span>Figma</span><span>HTML</span><span>Merrill</span><span>Conventional Commits</span></div>
+        <div class="plinks"><a class="btn" href="#case-commit">Read case study</a><a class="btn ghost" href="https://5famder.github.io/commit-message-storyboard/">Open storyboard</a></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="thumb"><img alt="Course cover: a prompt card with four numbered parts, Task, Context, Constraints, Format" src="cover.jpg"></div>
+      <div class="pbody">
+        <span class="kind">5-day course · Professionals</span>
+        <h3>AI Prompting Essentials</h3>
+        <p>Five short days that turn one-line requests into prompts people can reuse at work, and teach them to check the answer. Built on 4C/ID.</p>
+        <span class="status live">Live · all 5 days built</span>
+        <div class="tools"><span>HeyGen</span><span>ElevenLabs</span><span>Figma</span><span>HTML</span><span>4C/ID</span></div>
+        <div class="plinks"><a class="btn" href="#case-aipe">Read case study</a><a class="btn ghost" href="https://5famder.github.io/ai-prompting-essentials/">Open course</a></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="tab" id="process" data-tab hidden>
+  <div class="sec-h"><h2>How I design</h2><p>This is how I worked on all three projects. I start by using the product myself and finish by checking that the course actually works.</p></div>
+  <div class="proc">
+    <div class="step"><span class="n">1</span><div><h3>Use the product as a beginner</h3><p>I go through onboarding myself and write down every place I get stuck.</p><p class="ex">Found: the quickstart model was Dedicated-only, so new users' first call failed.</p></div></div>
+    <div class="step"><span class="n">2</span><div><h3>Define the learner and the gap</h3><p>One sentence on who they are, what they can already do, and what they get wrong today.</p><p class="ex">"Knows Python and the terminal, has never called an LLM through an API."</p></div></div>
+    <div class="step"><span class="n">3</span><div><h3>Write objectives backwards</h3><p>What the learner can do at the end, as observable actions. Then the assessment. Then the content.</p><p class="ex">Create a key · send a request · read the response · change it.</p></div></div>
+    <div class="step"><span class="n">4</span><div><h3>Choose the model for the skill</h3><p>A procedure, a judgement skill and a habit need different designs. I pick the model to match.</p><p class="ex">Prompting is a judgement skill, so AI Prompting Essentials uses 4C/ID.</p></div></div>
+    <div class="step"><span class="n">5</span><div><h3>Blueprint before the tool</h3><p>Every lesson gets one goal and one learner action on a single page before I open Rise.</p><p class="ex">A lesson with no action of its own gets merged.</p></div></div>
+    <div class="step"><span class="n">6</span><div><h3>Use real data only</h3><p>Model names from the live catalog, code I ran, outputs I generated. No invented examples.</p><p class="ex">11 real ChatGPT outputs power the "Fix the prompt" interaction.</p></div></div>
+    <div class="step"><span class="n">7</span><div><h3>Build with the right tool per job</h3><p>Video for the "why", click-through demos for the "how", interaction for practice.</p><p class="ex">HeyGen · Supademo · Figma · Rise · custom HTML.</p></div></div>
+    <div class="step"><span class="n">8</span><div><h3>Test accessibility and tracking</h3><p>Captions, keyboard use, colour never alone, mobile. Then an LMS test run.</p><p class="ex">SCORM Cloud: complete, passed, 75%.</p></div></div>
+    <div class="step"><span class="n">9</span><div><h3>Review with an expert and learners</h3><p>An engineer checks technical accuracy; a small pilot shows where learners struggle.</p><p class="ex">Feedback that isn't confirmed on screen gets rewritten.</p></div></div>
+    <div class="step"><span class="n">10</span><div><h3>Explain the decisions</h3><p>A short designer's note closes each project: who it's for, what I chose, what I'd do next.</p></div></div>
+  </div>
+
+  <div class="sec-h"><h2 style="font-size:24px">Models I use, and where</h2></div>
+  <div class="models"><table>
+    <thead><tr><th>Model</th><th>What it means in practice</th><th>Used in</th></tr></thead>
+    <tbody>
+      <tr><td><b>Merrill's First Principles</b></td><td>Start from a real task; demonstrate, then let learners apply</td><td>API course · Commit storyboard</td></tr>
+      <tr><td><b>4C/ID</b></td><td>Whole tasks from simple to complex, with support that fades</td><td>AI Prompting Essentials</td></tr>
+      <tr><td><b>Mayer's multimedia principles</b></td><td>Pre-training, no redundant narration, nothing extra on screen</td><td>All three</td></tr>
+      <tr><td><b>Cognitive Load Theory</b></td><td>Few new terms before the first action; worked examples for novices</td><td>All three</td></tr>
+      <tr><td><b>Backward design + Bloom</b></td><td>Observable objectives first, assessment aligned to them</td><td>All three</td></tr>
+      <tr><td><b>Kirkpatrick + xAPI</b></td><td>Measure learning and behaviour, not only completion</td><td>API course · AI Prompting Essentials</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="ai">
+    <h3>How I use AI in my work</h3>
+    <p>I use AI assistants to draft faster and to get a second reviewer. Decisions about audience, objectives, structure and what to cut are mine. I check every fact against the live product and run every piece of code myself.</p>
+  </div>
+</section>
+
+<!-- FIGMA -->
+<section class="tab" id="figma" data-tab hidden>
+  <div class="sec-h"><h2>Visual design</h2><p>Job aids, storyboard frames and covers I designed for these projects. One visual system across video, course and print. Click any image to see it full size.</p></div>
+  <div class="gallery">
+    <figure class="fig"><button class="shot zoom top" type="button" data-full="fig/job-aid.jpg" data-alt="Prompt brief job aid: four prompt elements with examples, a safe-to-paste checklist and a reminder to check every fact"><img src="fig/job-aid.jpg" alt="" style="object-position:top" loading="lazy"></button><h3>Prompt brief · job aid</h3><p>One printable A4 page: the four prompt elements with examples, what's safe to paste, and one habit before sending.</p></figure>
+    <figure class="fig"><button class="shot zoom" type="button" data-full="fig/anatomy.jpg" data-alt="Anatomy of a prompt: one prompt split into four numbered parts, task, context, constraints and format"><img src="fig/anatomy.jpg" alt="" loading="lazy"></button><h3>Anatomy of a prompt</h3><p>Numbered segments link each part of the prompt to its label, so colour is never the only cue.</p></figure>
+    <figure class="fig"><button class="shot zoom" type="button" data-full="cover.jpg" data-alt="AI Prompting Essentials course cover: a prompt card with four numbered parts on a pastel gradient"><img src="cover.jpg" alt="" loading="lazy"></button><h3>Course cover</h3><p>Two versions: one without text for the course platform, one with the title for the portfolio.</p></figure>
+    <figure class="fig"><button class="shot zoom" type="button" data-full="fig/heygen.jpg" data-alt="Two video frames: a Bubble slide with a prompt and three generic AI answers, and a Split slide with the presenter and the phrase A prompt is a brief"><img src="fig/heygen.jpg" alt="" loading="lazy"></button><h3>Video slide system · HeyGen</h3><p>Three layouts (Full, Bubble, Split) on one 1920×1080 grid, with fixed card sizes and captions. The presenter is my AI avatar, disclosed to learners.</p></figure>
+    <figure class="fig"><button class="shot zoom dark" type="button" data-full="fig/api-pipeline.jpg" data-alt="Request pipeline diagram: the request you send, key and budget check, the already running model, and the response with text, finish reason and token usage, plus the SDK call"><img src="fig/api-pipeline.jpg" alt="" loading="lazy"></button><h3>Request pipeline · API course</h3><p>What happens between sending a request and getting an answer, in four steps, next to the real SDK call.</p></figure>
+    <figure class="fig"><button class="shot zoom dark" type="button" data-full="fig/storyboard-beat.jpg" data-alt="Four storyboard frames in VS Code: stage changes, generate, read what the tool proposes, adjust and commit"><img src="fig/storyboard-beat.jpg" alt="" loading="lazy"></button><h3>Storyboard frames · four beats</h3><p>Stage, generate, read, adjust. VS Code mockups on the Dark+ palette, so they read as the real editor.</p></figure>
+    <figure class="fig"><button class="shot zoom dark" type="button" data-full="fig/storyboard-limit.jpg" data-alt="Limit card: three unrelated files produce one bundled commit message the tool cannot split"><img src="fig/storyboard-limit.jpg" alt="" loading="lazy"></button><h3>Limit card</h3><p>Shows what the tool can't do: it describes a bundled commit but can't split it.</p></figure>
+  </div>
+</section>
+
+<dialog class="lightbox" id="lb" aria-label="Image viewer"><button class="x" type="button" id="lbClose" aria-label="Close">×</button><img id="lbImg" alt=""></dialog>
+
+<!-- EDUCATION -->
+<section class="tab" id="education" data-tab hidden>
+  <div class="sec-h"><h2>Education & skills</h2><p>A teaching-methodology degree, eight years of designing learning, and recent training focused on AI and technical content.</p></div>
+  <div class="edu">
+    <div class="panel">
+      <h3>Education</h3>
+      <div class="list">
+        <div class="li"><span>BA, Teaching Methodology (Foreign Languages)<small>Herzen State Pedagogical University</small></span><span class="d"></span></div>
+        <div class="li"><span>Learning Experience Design programme<small>University of Michigan · in progress</small></span><span class="d">2025–</span></div>
+      </div>
+      <h3>Certificates</h3>
+      <div class="list">
+        <div class="li"><span>Google Prompting Essentials<small>Google · Coursera</small></span><span class="d">Sep 2026</span></div>
+        <div class="li"><span>ElevenLabs AI Voice Masterclass<small>Skillademia</small></span><span class="d">Sep 2026</span></div>
+        <div class="li"><span>Programming: Getting Started with Python<small>University of Michigan</small></span><span class="d">Jul 2026</span></div>
+        <div class="li"><span>Technical Writing One & Two<small>Google</small></span><span class="d">Jun 2026</span></div>
+        <div class="li"><span>xAPI Fundamentals<small>Learning Dojo</small></span><span class="d">2026</span></div>
+        <div class="li"><span>AI Fundamentals<small>Google</small></span><span class="d">Mar 2026</span></div>
+        <div class="li"><span>LXD: Theories and Frameworks<small>University of Michigan</small></span><span class="d">Feb 2026</span></div>
+        <div class="li"><span>LXD: Orientation to the Profession<small>University of Michigan</small></span><span class="d">Sep 2025</span></div>
+        <div class="li"><span>Fundamentals of Instructional Design<small>Madecraft</small></span><span class="d">Sep 2025</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Skills</h3>
+      <div class="skillgroup"><b>Learning design</b><div class="skills"><span>4C/ID</span><span>Merrill's First Principles</span><span>Mayer's principles</span><span>Cognitive Load Theory</span><span>Backward design</span><span>Bloom's taxonomy</span><span>Worked examples</span><span>Rubrics & performance assessment</span><span>Storyboarding</span><span>Technical writing</span><span>Prompt design</span><span>WCAG accessibility</span></div></div>
+      <div class="skillgroup"><b>Tools</b><div class="skills"><span>Articulate Rise 360</span><span>HeyGen</span><span>ElevenLabs</span><span>Supademo</span><span>Figma & Figma Make</span><span>HTML & GitHub Pages</span><span>Moodle</span><span>xAPI & SCORM</span><span>SCORM Cloud</span><span>ChatGPT · Claude · Gemini</span></div></div>
+      <h3>Languages</h3>
+      <div class="lang">
+        <div>Russian<small>Native</small></div><div>English<small>Fluent</small></div><div>Dutch<small>Advanced</small></div><div>French<small>Intermediate</small></div><div>Romanian<small>A1</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY: API -->
+<section class="tab case-page" id="case-api" data-tab hidden>
+  <a class="back" href="#work">← All work</a>
+  <div class="case-hero">
+    <span class="kind">Case study · E-learning course · Developers</span>
+    <h2>Your First Inference Request</h2>
+    <p class="lead2">A 20-minute course that takes a Python developer from no API key to a working request to Nebius Token Factory, and teaches them to read and change the response.</p>
+    <div class="plinks"><a class="btn" href="https://5famder.github.io/api-course/">Open the course</a><a class="btn ghost" href="downloads/api-course-xapi.zip" download>Download xAPI package</a></div>
+  </div>
+
+  <div class="glance">
+    <div><b>My role</b>Sole designer: product audit, objectives, content, code testing, visuals, Rise build, tracking</div>
+    <div><b>Audience</b>Python developers making their first call to an LLM API</div>
+    <div><b>Length</b>About 20 minutes · 8 lessons · 4 objectives</div>
+    <div><b>Design model</b>Merrill's First Principles and Carroll's minimalism, with Mayer's pre-training</div>
+    <div><b>Media</b>Supademo walkthrough, animated request diagram, tested Python code, knowledge checks</div>
+    <div><b>Build</b>Rise 360, xAPI, tested in SCORM Cloud</div>
+  </div>
+
+  <div class="case-body">
+    <nav class="case-nav" aria-label="Case study sections">
+      <a href="#api-analyze">1 · Analyse</a>
+      <a href="#api-design">2 · Design</a>
+      <a href="#api-develop">3 · Develop</a>
+      <a href="#api-implement">4 · Implement</a>
+      <a href="#api-evaluate">5 · Evaluate</a>
+      <a href="#api-decisions">Key decisions</a>
+      <a href="#api-next">What I'd do next</a>
+    </nav>
+
+    <div class="case-content">
+
+      <section class="cs" id="api-analyze">
+        <span class="step-k">1 · Analyse</span>
+        <h3>I went through onboarding as a new user</h3>
+        <p>I signed up for Token Factory and followed the official quickstart, noting every place I got stuck. Three findings shaped the course:</p>
+        <ul class="ul">
+          <li><b>Too much before the first result.</b> Projects, tenants, IAM and quotas all appear before a developer has sent a single request.</li>
+          <li><b>Errors aren't explained.</b> The most common first errors have no guidance next to them.</li>
+          <li><b>The quickstart example fails for new users.</b> Its model, DeepSeek-R1-0528, is only available on a dedicated endpoint (checked in the model catalog, September 2026), so copying the example returns an error on the very first request.</li>
+        </ul>
+        <h4>Who the learner is</h4>
+        <p class="persona">A backend developer asked to add a language model to a product. Comfortable with Python and the terminal; new to API keys, tokens, temperature and <code>finish_reason</code>. Explaining what a terminal is would sound condescending.</p>
+        <p>The course is for developers who want to <b>use</b> a model through Token Factory, not run one on Nebius AI Cloud. Lesson 1 says so, and points the second group elsewhere.</p>
+      </section>
+
+      <section class="cs" id="api-design">
+        <span class="step-k">2 · Design</span>
+        <h3>Four objectives, four lessons, four quiz questions</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Objective</th><th>The learner can…</th><th>Lesson</th></tr></thead>
+          <tbody>
+            <tr><td><b>Create</b></td><td>Create an API key and keep it in an environment variable, not in the code</td><td>2</td></tr>
+            <tr><td><b>Send</b></td><td>Send a chat-completion request to Token Factory from Python</td><td>4</td></tr>
+            <tr><td><b>Read</b></td><td>Find the generated text, why generation stopped, and how many tokens it used</td><td>5</td></tr>
+            <tr><td><b>Change</b></td><td>Change the model and the temperature, and predict what each change does</td><td>6</td></tr>
+          </tbody>
+        </table></div>
+        <p>Lesson titles repeat the four verbs, and the final quiz has one question per objective, each in a new situation rather than a repeat of a lesson check.</p>
+        <h3>Why these models</h3>
+        <p><b>Merrill's First Principles</b> put one real task at the centre: get a first answer from the model. <b>Carroll's minimalism</b>, written for teaching software, says people learn by doing and by recovering from errors, so the course gets to code fast and treats errors as content. <b>Mayer's pre-training</b> sets a hard cap: five new terms before the code, everything else when it's needed.</p>
+      </section>
+
+      <section class="cs" id="api-develop">
+        <span class="step-k">3 · Develop</span>
+        <h3>Everything checked against the live product</h3>
+        <ul class="ul">
+          <li><b>Base URL and key variable</b> checked against the official quickstart. An earlier draft used <code>API_KEY</code>, which would have failed.</li>
+          <li><b>Model chosen from the live catalog:</b> <code>Qwen/Qwen3-30B-A3B-Instruct-2507</code>, marked Public, fast and cheap. An Instruct model rather than a reasoning one, so temperature visibly changes the answer in lesson 6.</li>
+          <li><b>Code run on my own machine.</b> The response in lesson 5 is the real one: <code>finish_reason: "stop"</code>, 60 tokens.</li>
+          <li><b>The OpenAI key trap.</b> If the Nebius key isn't set, the library complains about <code>OPENAI_API_KEY</code>, and beginners think they need an OpenAI key. The error block in lesson 4 explains this.</li>
+        </ul>
+        <h4>Media</h4>
+        <p>A Supademo walkthrough of creating a key in the real console, an animated diagram of the request pipeline, code in Rise code blocks so indentation survives copying, and no narration: developers skim and copy code, and a voice reading on-screen text adds load without adding meaning.</p>
+      </section>
+
+      <section class="cs" id="api-implement">
+        <span class="step-k">4 · Implement</span>
+        <h3>Built in Rise, tracked with xAPI</h3>
+        <p>Completion is based on the final quiz, pass mark 75%, reported as passed or failed so the LMS shows whether the objectives were met, not just whether the course was scrolled through. Rise doesn't send in-lesson knowledge checks to the LMS, so all metrics are built on the final quiz.</p>
+        <p>The web version on GitHub Pages runs without an LMS, so anyone can take it. The xAPI package is available to download above.</p>
+      </section>
+
+      <section class="cs" id="api-evaluate">
+        <span class="step-k">5 · Evaluate</span>
+        <h3>Tested in an LMS</h3>
+        <p>I uploaded the xAPI package to SCORM Cloud and took the course as a learner, with one deliberate wrong answer:</p>
+        <figure class="evidence"><img src="fig/scorm-cloud.jpg" alt="SCORM Cloud report: completion complete, success passed, score 75 percent, total time 4 minutes 24 seconds" loading="lazy"></figure>
+        <h3>Reviewed by a Python developer</h3>
+        <p><a href="https://www.linkedin.com/in/igor-borovik-362844227/" target="_blank" rel="noopener">Igor Borovik</a>, Python Developer, reviewed the course. His comments led to four changes:</p>
+        <ul class="ul">
+          <li>Lesson 2 now opens by explaining why we use the <code>openai</code> library: it saves writing HTTP requests by hand.</li>
+          <li>Explanations moved into the code itself, as comments next to each line.</li>
+          <li>Lesson 4 explains <code>messages</code> as a chat that the model completes, not a single question.</li>
+          <li>The three roles, <code>system</code>, <code>user</code> and <code>assistant</code>, are explained, with a check on where rules for the whole chat belong.</li>
+        </ul>
+        <h4>How I'd measure it in production</h4>
+        <p>In the course: completion, quiz pass rate and the questions failed most. In the product: the share of new accounts that make a first successful API call, and how fast. In support: fewer tickets about keys, base URLs and unavailable models. The product metric matters most, because the course exists to get people using the platform.</p>
+      </section>
+
+      <section class="cs" id="api-decisions">
+        <span class="step-k">Key decisions</span>
+        <div class="dec">
+          <div><b>First success comes first</b><p>Key and request come early. Projects, IAM and quotas wait for a later module, once the learner has a reason to care.</p></div>
+          <div><b>Five terms, hard cap</b><p>Only API key, base URL, model ID, token and temperature before the code.</p></div>
+          <div><b>Errors are content</b><p>The five most likely first errors sit in the lesson, exactly as the learner sees them.</p></div>
+          <div><b>Nothing copied from the docs unchecked</b><p>Model names, URLs and responses come from the live product, which is how the quickstart problem was found.</p></div>
+        </div>
+      </section>
+
+      <section class="cs" id="api-next">
+        <span class="step-k">What I'd do next</span>
+        <ul class="ul">
+          <li>Watch 3 developers take the course and note where they stop or copy code incorrectly.</li>
+          <li>Confirm model availability with the product team before each update, since the catalog changes.</li>
+          <li>Add a follow-up module: choosing and comparing models, then streaming and function calling.</li>
+        </ul>
+        <div class="plinks"><a class="btn" href="https://5famder.github.io/api-course/">Open the course</a><a class="btn ghost" href="#work">Back to all work</a></div>
+      </section>
+
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY: COMMIT -->
+<section class="tab case-page" id="case-commit" data-tab hidden>
+  <a class="back" href="#work">← All work</a>
+  <div class="case-hero">
+    <span class="kind">Case study · Storyboard · Junior developers</span>
+    <h2>Git Commit Message Generator</h2>
+    <p class="lead2">A storyboard for a 4-minute interactive lesson: juniors learn to use an AI tool that writes commit messages, and to catch what it gets wrong.</p>
+    <div class="plinks"><a class="btn" href="https://5famder.github.io/commit-message-storyboard/">Open the storyboard</a></div>
+  </div>
+
+  <div class="glance">
+    <div><b>My role</b>Sole designer: analysis, objective, script, interactions, feedback, Figma frames</div>
+    <div><b>Audience</b>Junior developers, 0–2 years, who already use Git</div>
+    <div><b>Length</b>~4 minutes · 6 screens · 2:20 of practice</div>
+    <div><b>Design model</b>Merrill's First Principles, with Mayer's multimedia principles</div>
+    <div><b>Deliverable</b>Written storyboard with key frames, ready to build in Storyline 360</div>
+    <div><b>Context</b>Test assignment for Nebius Academy; the product is fictional, from the brief</div>
+  </div>
+
+  <div class="case-body">
+    <nav class="case-nav" aria-label="Case study sections">
+      <a href="#commit-analyze">1 · Analyse</a>
+      <a href="#commit-design">2 · Design</a>
+      <a href="#commit-develop">3 · Develop</a>
+      <a href="#commit-implement">4 · Implement</a>
+      <a href="#commit-evaluate">5 · Evaluate</a>
+      <a href="#commit-decisions">Key decisions</a>
+      <a href="#commit-next">What I'd do next</a>
+    </nav>
+
+    <div class="case-content">
+
+      <section class="cs" id="commit-analyze">
+        <span class="step-k">1 · Analyse</span>
+        <h3>The problem</h3>
+        <p>Junior developers write commit messages like "fix", "wip" or "stuff". An AI generator can write better ones, but juniors tend to accept whatever it suggests, including the wrong type of change. The risk isn't that they don't use the tool. It's that they trust it without reading.</p>
+        <h4>Who the learner is</h4>
+        <p class="persona">A junior developer with up to two years of experience. Makes commits every day, has never been taught a message format, and has never had to find a bug through the project history.</p>
+        <h4>What they need, and what they don't</h4>
+        <ul class="ul">
+          <li><b>They need:</b> a reason to care, one format (Conventional Commits), and the habit of checking the tool's suggestion.</li>
+          <li><b>They don't need:</b> Git basics, message bodies and footers, breaking changes, rewriting history or commitlint setup. Each is worth its own lesson, and none is needed to meet the objective.</li>
+        </ul>
+      </section>
+
+      <section class="cs" id="commit-design">
+        <span class="step-k">2 · Design</span>
+        <h3>One objective</h3>
+        <p class="persona">After this lesson, a junior developer can generate a commit message with the tool, check it against the Conventional Commits format, and correct it when the tool gets it wrong.</p>
+
+        <h3>Why Merrill's First Principles</h3>
+        <p>Merrill's principles start from a real problem, then demonstrate, then let the learner apply. That fits a short lesson where motivation has to come first: juniors won't care about a format until they feel what bad messages cost them.</p>
+        <div class="tbl"><table>
+          <thead><tr><th>Principle</th><th>Screen</th><th>What the learner does</th></tr></thead>
+          <tbody>
+            <tr><td><b>Problem</b></td><td>1 · Find it</td><td>Tries to find the commit that broke payments in a history of "fix" and "wip". Can't. Then finds it in two seconds when the messages are clear.</td></tr>
+            <tr><td><b>Demonstration</b></td><td>2 · The rule</td><td>Sees one message split into type, scope and description</td></tr>
+            <tr><td><b>Demonstration</b></td><td>3 · The tool</td><td>Watches the tool propose a message, and a developer fix its wrong scope. Sees what the tool can't do.</td></tr>
+            <tr><td><b>Application</b></td><td>4 · Choose</td><td>Picks the best of three generated messages</td></tr>
+            <tr><td><b>Application</b></td><td>5 · Fix</td><td>Finds the wrong part of a message and corrects it, unaided</td></tr>
+            <tr><td><b>Integration</b></td><td>6 · Your code</td><td>Gets a reference card and one habit to take to the next commit</td></tr>
+          </tbody>
+        </table></div>
+        <p>Support fades across screens 4 and 5: <b>recognise → choose → fix</b>. Every screen uses a fresh example, so no answer is shown before it's asked for. Learners act for 140 of the 240 seconds.</p>
+      </section>
+
+      <section class="cs" id="commit-develop">
+        <span class="step-k">3 · Develop</span>
+        <h3>Why a written storyboard</h3>
+        <p>The lesson is narrated, so the script carries most of the meaning, and a script is what a reviewer can check line by line. Every screen uses the same rows in the same order: narration, on screen, learner action, feedback, technical notes. I only mocked up the parts where layout is part of the learning: the commit log, the editor and the message parts.</p>
+        <h3>What's in the storyboard</h3>
+        <ul class="ul">
+          <li>Narration for every screen, written to be heard, not read.</li>
+          <li>The learner action on every screen, and feedback for every option, right or wrong. Wrong answers explain why, not just "incorrect".</li>
+          <li>Four VS Code frames and a "limit card" for the tool demo, designed in Figma on the VS Code Dark+ palette.</li>
+          <li>A reference card at the end, designed to be screenshotted.</li>
+        </ul>
+        <h4>Accessibility</h4>
+        <p>Colour is never the only signal: message parts are numbered as well as coloured. Everything works by keyboard. Narration is captioned, and the lesson works with sound off. Code is real text, not images.</p>
+      </section>
+
+      <section class="cs" id="commit-implement">
+        <span class="step-k">4 · Implement</span>
+        <h3>Ready to build</h3>
+        <p>Storyline 360 rather than Rise, because screens 1 and 5 need state changes and a two-step interaction that Rise blocks can't handle cleanly. Estimated build: 6–8 hours plus narration. The VS Code sequence on screen 3 is the only custom animation. The product is named only twice: in the demo and on the last screen.</p>
+        <h4>Questions for the product team</h4>
+        <p>Before building, I'd confirm what I had to assume: where the Generate button really is in VS Code, IntelliJ and the web app; whether the tool offers one draft or several; whether it can learn a project's own scopes; and which links and tracking the last screen should use.</p>
+      </section>
+
+      <section class="cs" id="commit-evaluate">
+        <span class="step-k">5 · Evaluate</span>
+        <h3>Expert review, already in progress</h3>
+        <p><a href="https://www.linkedin.com/in/alexandrts/" target="_blank" rel="noopener">Alexandr Tsaplin</a>, Software Engineer at Pinely, reviewed the storyboard for technical accuracy and clarity. Two changes came out of it:</p>
+        <ul class="ul">
+          <li><b>Screen 1 now sets the scene first.</b> The reviewer didn't immediately understand the situation. Now the narration introduces it ("You're on call this week…") before any commits appear.</li>
+          <li><b>Screen 2 now maps each part explicitly.</b> Colour alone didn't make clear that "fix" is the type and "(search)" the scope. Numbered parts and a small table fixed it.</li>
+        </ul>
+        <p>A second developer review is in progress, including the answers experts might disagree on, such as whether raising a limit is a <code>feat</code>.</p>
+        <h4>How I'd measure it</h4>
+        <p>First-try accuracy on screen 5, recorded as a SCORM interaction, and install clicks from UTM-tagged links on the last screen. For a four-minute lesson SCORM is enough; xAPI would add setup without adding data we need. If most get screen 5 wrong, screen 3 needs a clearer demonstration of checking.</p>
+      </section>
+
+      <section class="cs" id="commit-decisions">
+        <span class="step-k">Key decisions</span>
+        <div class="dec">
+          <div><b>Open with a failure</b><p>The learner can't find the bug in a bad history. The standard arrives as the answer to a problem they just felt.</p></div>
+          <div><b>Show where the tool stops</b><p>The demo includes its mistake and a card on what it can't do. Learners trust a tool more when the lesson is honest about its limits.</p></div>
+          <div><b>Practice is the longest part</b><p>The hardest screen, fixing a message, is the longest one. The demo is short.</p></div>
+          <div><b>Ask, don't assume</b><p>Where the brief didn't say how the tool works, the storyboard lists the question for the product team instead of inventing an answer.</p></div>
+        </div>
+      </section>
+
+      <section class="cs" id="commit-next">
+        <span class="step-k">What I'd do next</span>
+        <ul class="ul">
+          <li>Finish the second developer review and update any disputed answers.</li>
+          <li>Build a clickable prototype of screen 5 and test it with 2–3 junior developers.</li>
+          <li>Build it in Storyline and publish as SCORM, with first-try accuracy on screen 5 recorded as an interaction.</li>
+        </ul>
+        <div class="plinks"><a class="btn" href="https://5famder.github.io/commit-message-storyboard/">Open the storyboard</a><a class="btn ghost" href="#work">Back to all work</a></div>
+      </section>
+
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY: AIPE -->
+<section class="tab case-page" id="case-aipe" data-tab hidden>
+  <a class="back" href="#work">← All work</a>
+  <div class="case-hero">
+    <span class="kind">Case study · 5-day course · Professionals</span>
+    <h2>AI Prompting Essentials</h2>
+    <p class="lead2">A five-day course that takes office professionals from one-line requests to prompts they can reuse at work, and teaches them when not to trust the answer.</p>
+    <div class="plinks"><a class="btn" href="https://5famder.github.io/ai-prompting-essentials/">Open the course</a></div>
+  </div>
+
+  <div class="glance">
+    <div><b>My role</b>Sole designer: analysis, objectives, scripts, visual system, video and audio, build</div>
+    <div><b>Audience</b>Knowledge workers who use an AI assistant but rewrite most of what it gives them</div>
+    <div><b>Length</b>5 days · 30–40 min a day · 45 lessons</div>
+    <div><b>Design model</b>4C/ID, with Mayer's multimedia principles and spaced retrieval</div>
+    <div><b>Media</b>7 HeyGen videos · 2 ElevenLabs audio lessons · 20+ interactions</div>
+    <div><b>Build</b>Interactive HTML prototype on GitHub Pages; production target Rise 360 + Storyline</div>
+  </div>
+
+  <div class="case-body">
+    <nav class="case-nav" aria-label="Case study sections">
+      <a href="#aipe-analyze">1 · Analyse</a>
+      <a href="#aipe-design">2 · Design</a>
+      <a href="#aipe-develop">3 · Develop</a>
+      <a href="#aipe-implement">4 · Implement</a>
+      <a href="#aipe-evaluate">5 · Evaluate</a>
+      <a href="#aipe-decisions">Key decisions</a>
+      <a href="#aipe-next">What I'd do next</a>
+    </nav>
+
+    <div class="case-content">
+
+      <section class="cs" id="aipe-analyze">
+        <span class="step-k">1 · Analyse</span>
+        <h3>The problem</h3>
+        <p>People already use AI assistants at work. Sometimes the answer is great; more often it's generic, too long or slightly wrong, and they rewrite it by hand. Nobody taught them how to ask, or how to check.</p>
+        <h4>Learner persona</h4>
+        <p class="persona">Anna, 34, project coordinator. Uses an AI assistant a few times a week to draft emails and summarise meeting notes. Has 30 minutes a day for learning, between meetings, sometimes on her phone. Doesn't need the theory behind language models.</p>
+        <h4>Performance gap</h4>
+        <div class="tbl"><table>
+          <thead><tr><th>Today</th><th>After the course</th></tr></thead>
+          <tbody>
+            <tr><td>One-line requests, then manual rewriting</td><td>Structured prompts that produce usable first drafts</td></tr>
+            <tr><td>Accepts or rejects the first answer</td><td>Diagnoses what's missing and refines</td></tr>
+            <tr><td>Unsure when the output can be trusted</td><td>Checks facts, numbers and sources before using it</td></tr>
+            <tr><td>Pastes whatever is at hand, including sensitive data</td><td>Knows what must never go into a prompt</td></tr>
+          </tbody>
+        </table></div>
+        <h4>Is training the right answer?</h4>
+        <p>Partly. A job aid can hold the checklist, but the core skill, deciding what the model needs to know for this task, is a judgement that changes every time. That can only be built through practice on varied, whole tasks. So the course is built around practice, with the job aid as support.</p>
+        <h4>Constraints</h4>
+        <ul class="ul">
+          <li>Short sessions, often on mobile → every lesson and interaction works on a phone.</li>
+          <li>Different AI tools across companies → principles that transfer to any assistant.</li>
+          <li>Model outputs change over time → every example is pre-generated, dated and labelled.</li>
+        </ul>
+      </section>
+
+      <section class="cs" id="aipe-design">
+        <span class="step-k">2 · Design</span>
+        <h3>Objectives first</h3>
+        <p>Eight observable objectives, written as action, condition and criterion. None starts with "understand". Each one is practised in a task and measured in a check or in the capstone.</p>
+        <div class="tbl"><table>
+          <thead><tr><th>Day</th><th>The learner can…</th><th>Bloom</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Spot which of the four elements (task, context, constraints, format) a prompt is missing, in 4 of 5 cases</td><td>Analyse</td></tr>
+            <tr><td>1</td><td>Rewrite a one-line request into a prompt that produces a usable first draft</td><td>Apply</td></tr>
+            <tr><td>2</td><td>Add labelled material (text, file, image) and examples so the output matches a required style</td><td>Apply</td></tr>
+            <tr><td>3</td><td>Diagnose why an answer misses and choose the right fix</td><td>Analyse</td></tr>
+            <tr><td>3</td><td>Check an answer for invented facts and biased wording before using it</td><td>Evaluate</td></tr>
+            <tr><td>4</td><td>Split a complex task into a chain of prompts and ask for tables and checklists</td><td>Apply</td></tr>
+            <tr><td>All</td><td>Sort information into safe, remove first, never, with no errors on "never"</td><td>Apply</td></tr>
+            <tr><td>5</td><td>Build and test a reusable prompt template for a recurring task</td><td>Create</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>Why 4C/ID</h3>
+        <p>Prompting looks simple, but it's a judgement skill: there is no single correct prompt. Courses that teach it as a list of tips produce people who can recite the tips and still write weak prompts. 4C/ID was built for complex skills like this. It puts whole, realistic tasks at the centre, orders them from simple to complex, and withdraws support as competence grows.</p>
+        <div class="tbl"><table>
+          <thead><tr><th>4C/ID component</th><th>In this course</th></tr></thead>
+          <tbody>
+            <tr><td><b>Learning tasks</b></td><td>One task class per day, from a single clear request to the learner's own recurring task</td></tr>
+            <tr><td><b>Supportive information</b></td><td>A short presenter video each day: why the model answers the way it does</td></tr>
+            <tr><td><b>Procedural information</b></td><td>Prompt anatomy, the chain pattern, a template: given exactly when needed</td></tr>
+            <tr><td><b>Part-task practice</b></td><td>Quick drills: spot the missing element, name the cause, pick the shape, safe to paste</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4>Five task classes, simple to complex</h4>
+        <div class="days5">
+          <div><b>Day 1</b>One clear request</div>
+          <div><b>Day 2</b>Working from material</div>
+          <div><b>Day 3</b>When the answer is wrong</div>
+          <div><b>Day 4</b>Multi-step work</div>
+          <div><b>Day 5</b>Your own task</div>
+        </div>
+        <p>Inside each day, support fades: <b>worked example → completion task → real task in the learner's own AI assistant</b>. The next day starts a harder task class and support goes back up. Days 2–5 open with two retrieval questions on the day before.</p>
+      </section>
+
+      <section class="cs" id="aipe-develop">
+        <span class="step-k">3 · Develop</span>
+        <h3>Real outputs only</h3>
+        <p>Every AI answer in the course is real: generated in a clean chat, unedited, and labelled with the model and date. I ran 30+ prompts and built the lessons around what actually came back, including the mistakes. Those mistakes became the best teaching material:</p>
+        <ul class="ul">
+          <li>The same budget line came back as "$4k" in one run and "€4k" in the next. The notes gave no currency.</li>
+          <li>Asked "why was the launch cancelled?", the model explained a cancellation that never happened.</li>
+          <li>A job ad prompt with "young and energetic" produced an ad that repeated "young".</li>
+          <li>A tested template flagged unclear items in one run and said "nothing is unclear" in another.</li>
+        </ul>
+
+        <h3>The right medium for each job</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Medium</th><th>Used for</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td><b>Video</b> · HeyGen</td><td>Opening each day: the "why"</td><td>A face and a voice help a mental model land. Seven videos, one presenter: an AI avatar of me, disclosed to learners</td></tr>
+            <tr><td><b>Audio</b> · ElevenLabs</td><td>Two procedural lessons</td><td>Optional, next to the same text. Nothing to show on screen, so a video would add nothing</td></tr>
+            <tr><td><b>Interactions</b></td><td>All practice</td><td>Fix-the-prompt builder, spot-the-wrong-row, click the sentence that needs fixing, order the chain, drills</td></tr>
+          </tbody>
+        </table></div>
+        <p>All videos follow one style system: a 1920×1080 grid, three layouts (Full, Bubble, Split), fixed card sizes and one palette, documented so any video can be updated without redesign.</p>
+
+        <h4>Accessibility</h4>
+        <p>Captions in every video and a transcript below it. Every interaction works by keyboard and click. Colour is never the only signal. Plain English for non-native speakers. Tested at phone width.</p>
+      </section>
+
+      <section class="cs" id="aipe-implement">
+        <span class="step-k">4 · Implement</span>
+        <h3>From prototype to production</h3>
+        <p>The whole course is built as a working HTML prototype and published on GitHub Pages, so anyone can take it without an account. The production target is Rise 360 with embedded Storyline blocks, reporting completion, quiz score and capstone result to the LMS through xAPI.</p>
+        <p>Self-paced by design: one day at a time, 30–40 minutes, spaced over a week.</p>
+      </section>
+
+      <section class="cs" id="aipe-evaluate">
+        <span class="step-k">5 · Evaluate</span>
+        <h3>Assessment</h3>
+        <ul class="ul">
+          <li><b>Every day:</b> drills and checks with feedback on every option, not just "incorrect".</li>
+          <li><b>Final check:</b> 10 scenario questions drawn from a bank of 20, options shuffled, pass mark 8 of 10.</li>
+          <li><b>Capstone:</b> the learner builds a template for their own weekly task, tests it on two real cases and checks it against four criteria: complete, reusable, safe, tested.</li>
+          <li><b>Certificate:</b> of achievement when both are passed, of completion otherwise.</li>
+        </ul>
+        <h3>Evaluation plan</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Kirkpatrick level</th><th>Measure</th></tr></thead>
+          <tbody>
+            <tr><td><b>1 · Reaction</b></td><td>Three-question pulse at the end of each day</td></tr>
+            <tr><td><b>2 · Learning</b></td><td>Final check score; capstone criteria</td></tr>
+            <tr><td><b>3 · Behaviour</b></td><td>Survey after 30 days: do they still use their template, how much do they rewrite AI output</td></tr>
+            <tr><td><b>4 · Results</b></td><td>Agreed with the stakeholder before launch, e.g. time saved on recurring writing tasks</td></tr>
+          </tbody>
+        </table></div>
+        <p>After the first 100 learners, the data triggers changes: any question fewer than 40% get right is reviewed for ambiguity; any day with more than 20% drop-off is reviewed for length.</p>
+      </section>
+
+      <section class="cs" id="aipe-decisions">
+        <span class="step-k">Key decisions</span>
+        <div class="dec">
+          <div><b>Pre-generated, not live AI</b><p>A live model inside the course would make feedback impossible to write. Real, dated outputs keep every feedback line true to what the learner sees.</p></div>
+          <div><b>Show the model's mistakes</b><p>Every worked example includes something the model got wrong. The course teaches checking by showing why it's needed.</p></div>
+          <div><b>Data safety is non-negotiable</b><p>"Safe to paste?" is a daily item and a criterion the capstone can't pass without.</p></div>
+          <div><b>Video only where a face helps</b><p>Video opens each day. Procedures are text or optional audio, so learners can follow them at their own pace.</p></div>
+        </div>
+      </section>
+
+      <section class="cs" id="aipe-next">
+        <span class="step-k">What I'd do next</span>
+        <ul class="ul">
+          <li>Pilot Day 1 with 3–5 people from the audience, with think-aloud on the "Fix the prompt" task.</li>
+          <li>SME review of all examples by someone who uses AI assistants daily.</li>
+          <li>Rebuild in Rise 360 + Storyline and test xAPI statements in SCORM Cloud.</li>
+          <li>Add Supademo walkthroughs for tool-specific steps: new chat, attaching a file.</li>
+        </ul>
+        <div class="plinks"><a class="btn" href="https://5famder.github.io/ai-prompting-essentials/">Open the course</a><a class="btn ghost" href="#work">Back to all work</a></div>
+      </section>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap"><span>© 2026 Mariia Mukhina</span><span>Hand-built in HTML · hosted on GitHub Pages · drafted with AI assistance, design decisions by me</span></div></footer>
+
+<script>
+(function(){
+const TABS=['work','process','figma','education','case-aipe','case-commit','case-api'];
+function show(h){
+  let t=h, target=null;
+  if(!TABS.includes(t)){ const el=h&&document.getElementById(h); const sec=el&&el.closest('[data-tab]'); if(sec){t=sec.id;target=el} else t='work'; }
+  document.querySelectorAll('[data-tab]').forEach(s=>s.hidden=s.id!==t);
+  const nav=t.startsWith('case-')?'work':t;
+  document.querySelectorAll('.tabs a').forEach(a=>{ if(a.dataset.t===nav)a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  return target;
+}
+window.addEventListener('hashchange',()=>{const tg=show(location.hash.slice(1)); if(tg) tg.scrollIntoView({block:'start'}); else document.querySelector('.tabs').scrollIntoView({block:'start'})});
+show(location.hash.slice(1));
+
+const dlg=document.getElementById('meCard');
+document.getElementById('meBtn').onclick=()=>{ if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open',''); };
+document.getElementById('meClose').onclick=()=>dlg.close();
+dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
+
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg');
+document.querySelectorAll('.zoom').forEach(b=>b.onclick=()=>{lbImg.src=b.dataset.full;lbImg.alt=b.dataset.alt;lb.showModal?lb.showModal():lb.setAttribute('open','')});
+document.getElementById('lbClose').onclick=()=>lb.close();
+lb.addEventListener('click',e=>{if(e.target===lb)lb.close()});
+document.getElementById('copyMail').onclick=function(){
+  const t=document.getElementById('mail').textContent,b=this;
+  const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1500)};
+  try{navigator.clipboard.writeText(t).then(done,()=>{sel()})}catch(e){sel()}
+  function sel(){const r=document.createRange();r.selectNodeContents(document.getElementById('mail'));const s=getSelection();s.removeAllRanges();s.addRange(r)}
+};
+})();
+</script>
+
+</body>
+</html>
