@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HV Safety Road Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EEEBE3;
+  --navy:#1C2B6E;
+  --navy-2:#2E3F8A;
+  --ink:#141A3A;
+  --muted:#5B6185;
+  --amber:#F2B21B;
+  --red:#C8312A;
+  --white:#FFFFFF;
+  --verge:#D9D4C7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:var(--paper);color:var(--ink);font-family:Inter,"Liberation Sans",Arial,sans-serif;font-size:15px;line-height:1.45}
+.display{font-family:Anton,"Inter Display Black",Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.005em}
+.page{max-width:1080px;margin:0 auto;position:relative;overflow:hidden}
+
+/* road segments */
+.seg{position:relative}
+.road{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.road .verge{stroke:var(--verge);stroke-width:96}
+.road .tarmac{stroke:var(--navy);stroke-width:80}
+.road .lane{stroke:var(--amber);stroke-width:4;stroke-dasharray:22 18}
+.road path{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:butt}
+
+/* header */
+header{display:grid;grid-template-columns:1fr 1fr;min-height:520px}
+header .title{padding:64px 70px 40px 48px;position:relative;z-index:1}
+header .kicker{font-size:13px;font-weight:600;color:var(--navy-2)}
+header h1{font-size:64px;color:var(--navy);margin-top:12px}
+header .sub{margin-top:18px;font-size:16px;max-width:380px}
+header .by{margin-top:22px;font-size:14px;color:var(--muted)}
+header .by b{color:var(--ink)}
+header .legend{grid-column:2;align-self:end;padding:40px 48px 56px 90px;position:relative;z-index:1;display:grid;gap:10px;font-size:13px;color:var(--muted)}
+.legend b{color:var(--ink)}
+.legend .row{display:flex;align-items:center;gap:10px}
+.start{position:absolute;left:50%;top:0;transform:translateX(-50%);z-index:1;width:80px}
+.car{position:absolute;left:50%;transform:translateX(-50%);z-index:2;width:46px}
+
+/* levels + SC */
+.dots{display:inline-flex;gap:3px}
+.dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--navy);display:block}
+.dots i.on{background:var(--navy)}
+.sc{display:inline-block;background:var(--red);color:#fff;font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:.04em}
+
+/* domain stops */
+.stop{display:grid;grid-template-columns:1fr 1fr;min-height:560px;align-items:center}
+.stop .text{position:relative;z-index:1;padding:40px 0}
+.stop.l .text{grid-column:1;padding-left:48px;padding-right:80px}
+.stop.r .text{grid-column:2;padding-right:48px;padding-left:80px}
+.text h2{font-size:42px;color:var(--navy)}
+.text .lead{margin:8px 0 16px}
+.comp{background:var(--white);border-left:4px solid var(--navy);padding:11px 14px;margin-top:10px;border-radius:2px 10px 10px 2px}
+.comp .top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.comp .id{font-weight:700;color:var(--navy-2);font-size:13px}
+.comp .name{font-weight:700}
+.comp p{font-size:13.5px;margin-top:3px}
+.comp .meta{display:flex;align-items:center;gap:10px;margin-top:7px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+
+.sign{position:absolute;z-index:2;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center}
+.stop.l .sign{left:75.9%}
+.stop.r .sign{left:24.1%}
+.sign .disc{width:118px;height:118px;border-radius:50%;background:var(--white);border:9px solid var(--amber);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--navy)}
+.sign .disc span{font-size:52px;color:var(--navy)}
+.sign .plate{margin-top:10px;background:var(--white);border:2px solid var(--navy);color:var(--navy);font-weight:700;font-size:12px;padding:5px 11px;border-radius:4px;white-space:nowrap;display:flex;gap:7px;align-items:center}
+.sign .plate svg{width:18px;height:18px}
+
+/* finish */
+.finish{min-height:300px;display:flex;align-items:flex-end;justify-content:center}
+.flag{position:absolute;left:50%;transform:translateX(-50%);top:120px;z-index:1;width:110px;height:22px;background:
+  conic-gradient(var(--ink) 25%,#fff 0 50%,var(--ink) 0 75%,#fff 0) 0 0/22px 22px}
+.badge{position:relative;z-index:2;margin-bottom:-60px;width:170px;height:170px;border-radius:50%;background:var(--amber);border:8px solid var(--white);box-shadow:0 0 0 4px var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.badge .k{font-size:30px;color:var(--navy)}
+.badge small{font-size:12px;font-weight:600;color:var(--navy);margin-top:6px}
+
+.path{background:var(--navy);color:#fff;padding:96px 48px 52px}
+.path h3{font-size:40px;margin-bottom:6px}
+.path .intro{color:#C9CFEA;max-width:620px;margin-bottom:28px}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);position:relative}
+.steps::before{content:"";position:absolute;left:24px;right:24px;top:22px;border-top:3px dashed var(--amber)}
+.step{position:relative;padding-right:14px}
+.step .dot{width:46px;height:46px;border-radius:50%;background:var(--paper);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:Anton,"Inter Display Black",Impact,sans-serif;font-size:22px;position:relative}
+.step:last-child .dot{background:var(--amber)}
+.step h4{font-size:14.5px;margin:12px 0 4px}
+.step p{font-size:12.5px;color:#C9CFEA;line-height:1.4}
+.step .tool{display:inline-block;margin-top:7px;font-size:11px;font-weight:700;background:var(--navy-2);color:#fff;padding:2px 7px;border-radius:3px}
+
+footer{padding:26px 48px 34px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer b{color:var(--ink);font-size:13px}
+
+/* mobile: road becomes a straight lane on the left */
+@media (max-width:760px){
+  .road{display:none}
+  .seg::before{content:"";position:absolute;left:0;top:0;bottom:0;width:44px;background:var(--navy);border-right:5px solid var(--verge);z-index:0}
+  .seg::after{content:"";position:absolute;left:20px;top:0;bottom:0;border-left:3px dashed var(--amber);z-index:0}
+  header{grid-template-columns:1fr;min-height:0}
+  header .title{padding:84px 16px 10px 64px}
+  header h1{font-size:48px}
+  header .legend{grid-column:1;padding:10px 16px 32px 64px}
+  .start{left:22px;width:44px}
+  .car{left:22px;top:30px!important;width:30px}
+  .stop{grid-template-columns:1fr;min-height:0}
+  .stop.l .text,.stop.r .text{grid-column:1;padding:84px 16px 32px 64px}
+  .sign,.stop.l .sign,.stop.r .sign{left:22px;top:44px;transform:translate(-50%,0)}
+  .sign .disc{width:58px;height:58px;border-width:5px;box-shadow:0 0 0 3px var(--navy)}
+  .sign .disc span{font-size:26px}
+  .sign .plate{display:none}
+  .text h2{font-size:32px}
+  .finish{min-height:200px}
+  .flag{left:22px;width:44px;top:60px}
+  .badge{width:130px;height:130px}
+  .badge .k{font-size:22px}
+  .path{padding:84px 16px 36px}
+  .path h3{font-size:30px}
+  .steps{grid-template-columns:1fr;gap:18px}
+  .steps::before{left:22px;right:auto;top:20px;bottom:20px;border-top:0;border-left:3px dashed var(--amber)}
+  .step{display:grid;grid-template-columns:46px 1fr;column-gap:14px}
+  .step .dot{grid-row:1 / span 3}
+  .step h4{margin-top:4px}
+  footer{padding:22px 16px 30px}
+}
+
+/* case study */
+.case{padding:56px 48px 20px;display:grid;grid-template-columns:1fr 1fr;gap:28px 56px}
+.case h3{grid-column:1/-1;font-size:40px;color:var(--navy)}
+.case h4{font-size:15px;color:var(--navy);margin-bottom:6px}
+.case p,.case li{font-size:14.5px}
+.case ul{padding-left:18px;display:grid;gap:6px}
+.case .wide{grid-column:1/-1}
+.case .dl{display:inline-block;margin-top:4px;background:var(--navy);color:#fff;font-weight:600;font-size:14px;padding:10px 16px;border-radius:6px;text-decoration:none}
+.case .dl:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+@media (max-width:760px){.case{grid-template-columns:1fr;padding:40px 16px 10px}.case h3{font-size:30px}}
+@media print{.case .dl{display:none}}
+@media print{@page{margin:0}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- START -->
+<header class="seg">
+  <svg class="road" viewBox="0 0 1080 100" preserveAspectRatio="none" aria-hidden="true">
+    <path class="verge" d="M540 0V100"/><path class="tarmac" d="M540 0V100"/><path class="lane" d="M540 0V100"/>
+  </svg>
+  <svg class="start" viewBox="0 0 80 20" aria-hidden="true">
+    <defs><pattern id="chk" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><rect width="5" height="5" fill="#141A3A"/><rect x="5" y="5" width="5" height="5" fill="#141A3A"/></pattern></defs>
+    <rect width="80" height="20" fill="url(#chk)"/>
+  </svg>
+  <svg class="car" style="top:60px" viewBox="0 0 46 80" aria-hidden="true">
+    <rect x="3" y="4" width="40" height="72" rx="14" fill="#C8312A" stroke="#fff" stroke-width="2.5"/>
+    <path d="M10 52h26l-3 12H13z" fill="#1C2B6E"/>
+    <path d="M11 22h24l-2 14H13z" fill="#9FB0E8"/>
+    <rect x="9" y="4" width="8" height="4" rx="2" fill="#F2B21B"/><rect x="29" y="4" width="8" height="4" rx="2" fill="#F2B21B"/>
+    <path d="M23 40l-4 7h4l-2 6 6-8h-4l2-5z" fill="#F2B21B"/>
+  </svg>
+  <div class="title">
+    <p class="kicker">Certification concept for EV service technicians</p>
+    <h1 class="display">The road to<br>HV Safety<br>Level 1</h1>
+    <p class="sub">Six stops a new technician passes before working near a high-voltage system alone: 18 competencies, each with a clear way to prove it.</p>
+    <p class="by">Designed by <b>Mariia Mukhina</b>, Learning Designer</p>
+  </div>
+  <div class="legend">
+    <div class="row"><b>How each competency is measured</b></div>
+    <div class="row"><span class="dots"><i class="on"></i><i></i><i></i></span> Aware: explains the rule or hazard</div>
+    <div class="row"><span class="dots"><i class="on"></i><i class="on"></i><i></i></span> Supervised: does it with a mentor</div>
+    <div class="row"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span> Independent: does it alone, every time</div>
+    <div class="row"><span class="sc">SC</span> Safety-critical: zero errors to certify</div>
+  </div>
+</header>
+
+<!-- 01 -->
+<section class="stop l seg">
+  <svg class="road" viewBox="0 0 1080 100" preserveAspectRatio="none" aria-hidden="true">
+    <path class="verge" d="M540 0C540 30 820 20 820 50S540 70 540 100"/><path class="tarmac" d="M540 0C540 30 820 20 820 50S540 70 540 100"/><path class="lane" d="M540 0C540 30 820 20 820 50S540 70 540 100"/>
+  </svg>
+  <div class="sign"><div class="disc"><span class="display">01</span></div></div>
+  <div class="text">
+    <h2 class="display">Know the system</h2>
+    <p class="lead">Where the high voltage is, and why "off" is not safe.</p>
+    <div class="comp"><div class="top"><span class="id">A1</span><span class="name">Identify HV components</span></div>
+      <p>Labels every HV component and orange cable on a vehicle or diagram, no errors.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Hotspot quiz + vehicle walkaround</div></div>
+    <div class="comp"><div class="top"><span class="id">A2</span><span class="name">Explain HV hazards</span></div>
+      <p>Explains shock, arc flash and stored energy in capacitors in own words.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i></i><i></i></span>Knowledge check</div></div>
+    <div class="comp"><div class="top"><span class="id">A3</span><span class="name">Interpret vehicle states</span></div>
+      <p>Explains why a parked, switched-off vehicle is still energised.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i></i><i></i></span>Scenario question</div></div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="stop r seg">
+  <svg class="road" viewBox="0 0 1080 100" preserveAspectRatio="none" aria-hidden="true">
+    <path class="verge" d="M540 0C540 30 260 20 260 50S540 70 540 100"/><path class="tarmac" d="M540 0C540 30 260 20 260 50S540 70 540 100"/><path class="lane" d="M540 0C540 30 260 20 260 50S540 70 540 100"/>
+  </svg>
+  <div class="sign"><div class="disc"><span class="display">02</span></div></div>
+  <div class="text">
+    <h2 class="display">Gear up</h2>
+    <p class="lead">The right protection and tools, checked before every job.</p>
+    <div class="comp"><div class="top"><span class="id">B1</span><span class="name">Select PPE for the task</span><span class="sc">SC</span></div>
+      <p>Chooses rated insulated gloves with protectors and eye/face protection; removes metal jewellery.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Practical checklist</div></div>
+    <div class="comp"><div class="top"><span class="id">B2</span><span class="name">Inspect insulated gloves</span><span class="sc">SC</span></div>
+      <p>Checks rating and test date, inspects and air-tests before each use; rejects a faulty glove.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Observed practical</div></div>
+    <div class="comp"><div class="top"><span class="id">B3</span><span class="name">Check meter and insulated tools</span><span class="sc">SC</span></div>
+      <p>Confirms meter category and voltage rating, inspects leads and tool insulation.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Observed practical</div></div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="stop l seg">
+  <svg class="road" viewBox="0 0 1080 100" preserveAspectRatio="none" aria-hidden="true">
+    <path class="verge" d="M540 0C540 30 820 20 820 50S540 70 540 100"/><path class="tarmac" d="M540 0C540 30 820 20 820 50S540 70 540 100"/><path class="lane" d="M540 0C540 30 820 20 820 50S540 70 540 100"/>
+  </svg>
+  <div class="sign"><div class="disc"><span class="display">03</span></div></div>
+  <div class="text">
+    <h2 class="display">Secure the zone</h2>
+    <p class="lead">Nobody walks in, nothing switches on by accident.</p>
+    <div class="comp"><div class="top"><span class="id">C1</span><span class="name">Set up HV work zone</span></div>
+      <p>Places barriers and signage before starting; keeps the zone clear.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Practical checklist</div></div>
+    <div class="comp"><div class="top"><span class="id">C2</span><span class="name">Secure the vehicle</span></div>
+      <p>Parks, moves the key out of range, follows the manual for the 12 V system.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Practical checklist</div></div>
+    <div class="comp"><div class="top"><span class="id">C3</span><span class="name">Apply lockout/tagout</span><span class="sc">SC</span></div>
+      <p>Locks and tags the isolation point and keeps their own key.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Observed practical</div></div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="stop r seg">
+  <svg class="road" viewBox="0 0 1080 100" preserveAspectRatio="none" aria-hidden="true">
+    <path class="verge" d="M540 0C540 30 260 20 260 50S540 70 540 100"/><path class="tarmac" d="M540 0C540 30 260 20 260 50S540 70 540 100"/><path class="lane" d="M540 0C540 30 260 20 260 50S540 70 540 100"/>
+  </svg>
+  <div class="sign"><div class="disc"><span class="display">04</span></div></div>
+  <div class="text">
+    <h2 class="display">Prove it's dead</h2>
+    <p class="lead">De-energise by the book, then verify before touching anything.</p>
+    <div class="comp"><div class="top"><span class="id">D1</span><span class="name">Follow the OEM de-energisation sequence</span><span class="sc">SC</span></div>
+      <p>Completes every step in order, including the specified wait time.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Observed practical</div></div>
+    <div class="comp"><div class="top"><span class="id">D2</span><span class="name">Verify absence of voltage</span><span class="sc">SC</span></div>
+      <p>Performs a live-dead-live test; does not touch until verified.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Observed practical</div></div>
+    <div class="comp"><div class="top"><span class="id">D3</span><span class="name">Document isolation</span></div>
+      <p>Records isolation status on the work order before work begins.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Work-order review</div></div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="stop l seg">
+  <svg class="road" viewBox="0 0 1080 100" preserveAspectRatio="none" aria-hidden="true">
+    <path class="verge" d="M540 0C540 30 820 20 820 50S540 70 540 100"/><path class="tarmac" d="M540 0C540 30 820 20 820 50S540 70 540 100"/><path class="lane" d="M540 0C540 30 820 20 820 50S540 70 540 100"/>
+  </svg>
+  <div class="sign"><div class="disc"><span class="display">05</span></div></div>
+  <div class="text">
+    <h2 class="display">When it goes wrong</h2>
+    <p class="lead">Recognise danger early, stop, and get help the right way.</p>
+    <div class="comp"><div class="top"><span class="id">E1</span><span class="name">Recognise an unstable battery</span><span class="sc">SC</span></div>
+      <p>Spots heat, smoke, hissing, swelling or odour; stops work and escalates.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Branching scenario</div></div>
+    <div class="comp"><div class="top"><span class="id">E2</span><span class="name">Respond to an electric shock</span><span class="sc">SC</span></div>
+      <p>Does not touch the casualty, isolates power, uses the rescue hook, calls for help.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i></i></span>Scenario + drill</div></div>
+    <div class="comp"><div class="top"><span class="id">E3</span><span class="name">Stop at the scope boundary</span><span class="sc">SC</span></div>
+      <p>Recognises a Level 2+ task and hands it over instead of attempting it.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Branching scenario</div></div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="stop r seg">
+  <svg class="road" viewBox="0 0 1080 100" preserveAspectRatio="none" aria-hidden="true">
+    <path class="verge" d="M540 0C540 30 260 20 260 50S540 70 540 100"/><path class="tarmac" d="M540 0C540 30 260 20 260 50S540 70 540 100"/><path class="lane" d="M540 0C540 30 260 20 260 50S540 70 540 100"/>
+  </svg>
+  <div class="sign"><div class="disc"><span class="display">06</span></div></div>
+  <div class="text">
+    <h2 class="display">Hand it over</h2>
+    <p class="lead">The next person knows exactly what state the car is in.</p>
+    <div class="comp"><div class="top"><span class="id">F1</span><span class="name">Communicate HV status</span></div>
+      <p>Updates the status board and briefs the next technician at handover.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>Role-play / observation</div></div>
+    <div class="comp"><div class="top"><span class="id">F2</span><span class="name">Return vehicle to service</span></div>
+      <p>Re-energises per manual and completes the return-to-service check.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i></i></span>Supervised practical</div></div>
+    <div class="comp"><div class="top"><span class="id">F3</span><span class="name">Report near-misses</span></div>
+      <p>Logs a near-miss within the shift using the site process.</p>
+      <div class="meta"><span class="dots"><i class="on"></i><i class="on"></i><i></i></span>Scenario question</div></div>
+  </div>
+</section>
+
+<!-- FINISH -->
+<div class="finish seg">
+  <svg class="road" viewBox="0 0 1080 100" preserveAspectRatio="none" aria-hidden="true">
+    <path class="verge" d="M540 0V100"/><path class="tarmac" d="M540 0V100"/><path class="lane" d="M540 0V100"/>
+  </svg>
+  <div class="flag"></div>
+  <div class="badge"><span class="k display">Certified</span><small>valid 12 months</small></div>
+</div>
+
+<section class="path">
+  <h3 class="display">How a technician travels the road</h3>
+  <p class="intro">Awareness is taught and checked online. Doing is proven on the shop floor, against the same criteria shown at each stop.</p>
+  <div class="steps">
+    <div class="step"><span class="dot">1</span><h4>Welcome</h4><p>Why HV safety matters and what the certificate unlocks.</p><span class="tool">HeyGen · 60 s</span></div>
+    <div class="step"><span class="dot">2</span><h4>Three e-learning modules</h4><p>Stops 01 to 04, about 10 minutes each.</p><span class="tool">Storyline</span></div>
+    <div class="step"><span class="dot">3</span><h4>Branching scenario</h4><p>Stop 05: wrong choices show consequences, not just "incorrect".</p><span class="tool">Storyline</span></div>
+    <div class="step"><span class="dot">4</span><h4>Knowledge check</h4><p>80% to pass; any missed SC question means a retake.</p><span class="tool">LMS</span></div>
+    <div class="step"><span class="dot">5</span><h4>Shop-floor practical</h4><p>Mentor ticks each criterion yes or no; every SC item must be correct.</p><span class="tool">Checklist</span></div>
+    <div class="step"><span class="dot">6</span><h4>Certificate + badge</h4><p>Valid 12 months, then a short refresher.</p><span class="tool">Badge</span></div>
+  </div>
+</section>
+
+
+<section class="case">
+  <h3 class="display">About this project</h3>
+  <div>
+    <h4>The challenge</h4>
+    <p>A new service technician may know cars well but have never worked near a high-voltage system. Before they work on an EV alone, the business needs proof that they can do it safely, not just a completed course.</p>
+  </div>
+  <div>
+    <h4>My approach</h4>
+    <p>I started with the job, not the content. I broke safe HV work down into what a technician must actually do and turned it into a competency map: 6 domains, 18 competencies, each with an observable criterion, a target level and an assessment method.</p>
+  </div>
+  <div class="wide">
+    <h4>Key design decisions</h4>
+    <ul>
+      <li><b>Doing over knowing.</b> Three proficiency levels show which skills need only understanding and which must be proven by hand.</li>
+      <li><b>Safety-critical gates.</b> 9 competencies need a zero-error pass, so a high quiz score can't hide a dangerous gap.</li>
+      <li><b>Yes/no criteria.</b> Each criterion can be ticked by a mentor on the shop floor, which keeps the practical fair across sites.</li>
+      <li><b>Consequences, not "incorrect".</b> Abnormal situations are taught through a branching scenario that shows what would really happen.</li>
+    </ul>
+  </div>
+  <div>
+    <h4>Deliverables</h4>
+    <p>Competency map, certification path design, and this visual road map for learners and managers.</p>
+  </div>
+  <div>
+    <h4>Tools</h4>
+    <p>Task analysis and competency-based assessment design. Planned build: Articulate Storyline, HeyGen, LMS.</p>
+  </div>
+  <div class="wide">
+    <h4>Next steps</h4>
+    <p>Validate procedures against the OEM service manual with a subject matter expert, then pilot the practical checklist with two mentors.</p>
+    <p style="margin-top:14px"><a class="dl" href="hv-safety-road-map.pdf" download>Download PDF</a></p>
+  </div>
+</section>
+
+<footer>
+  <span><b>Mariia Mukhina</b> · Learning Designer · 5famder.github.io</span>
+  <span>Concept project, not affiliated with or endorsed by Tesla. Procedures are generic; final content follows the OEM service manual and SME review.</span>
+</footer>
+
+</div>
+</body>
+</html>
