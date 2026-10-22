@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commit Message Storyboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+:root{
+  --paper:#FAFAFC; --sheet:#FFFFFF; --ink:#101318; --muted:#555C69; --faint:#8A909C;
+  --rule:#E6E7EE; --soft:#F3F3F8; --accent:#5B45F5; --accent-soft:#ECE9FF;
+  --canary:#EFFFA8;
+  --good:#1F7A4D; --good-soft:#E4F2EA; --bad:#B03A2E; --bad-soft:#FBE7E4;
+  --warn:#5A6300; --warn-soft:#F4FFC4;
+  --term:#1E1E1E; --term-ink:#CCCCCC; --term-dim:#8B8B8B;
+  --term-add:#81B88B; --term-del:#E06C75; --term-warn:#D7BA7D;
+  --t-feat:#1F7A4D; --t-scope:#5B45F5;
+  --sans:"Inter Tight", Arial, -apple-system, Helvetica, sans-serif;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#0F1116; --sheet:#171A21; --ink:#ECEEF3; --muted:#A5ABB8; --faint:#7E8594;
+    --rule:#2A2E38; --soft:#1F232B; --accent:#9D8CFF; --accent-soft:#262147;
+    --good:#6CC596; --good-soft:#123024; --bad:#F08C7E; --bad-soft:#3A1E1B;
+    --warn:#E3F58A; --warn-soft:#2A2F12;
+    --t-feat:#6CC596; --t-scope:#9D8CFF;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#0F1116; --sheet:#171A21; --ink:#ECEEF3; --muted:#A5ABB8; --faint:#7E8594;
+  --rule:#2A2E38; --soft:#1F232B; --accent:#9D8CFF; --accent-soft:#262147;
+  --good:#6CC596; --good-soft:#123024; --bad:#F08C7E; --bad-soft:#3A1E1B;
+  --warn:#E3F58A; --warn-soft:#2A2F12;
+  --t-feat:#6CC596; --t-scope:#9D8CFF;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);padding-inline:20px;padding-block:40px 80px}
+img{max-width:100%}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.15;font-family:var(--sans)}
+p{margin:0}
+code{font-family:var(--mono);font-size:.9em}
+.eyebrow{font:600 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.serif{font-family:var(--serif)}
+
+/* Header */
+header{display:flex;flex-direction:column;gap:20px;border-radius:24px;padding:40px clamp(20px,4vw,48px);color:#101318;border:1px solid #E6E7EE;
+  background:
+    radial-gradient(55% 90% at 8% 0%, #DCD6FF 0%, transparent 65%),
+    radial-gradient(45% 80% at 92% 5%, #FFDCEC 0%, transparent 65%),
+    radial-gradient(55% 90% at 85% 100%, #F2FFB5 0%, transparent 65%),
+    radial-gradient(45% 80% at 0% 100%, #CFF3E3 0%, transparent 65%),
+    #FFFFFF}
+header .eyebrow{color:#555C69}
+header h1{font-size:clamp(34px,5.5vw,58px);font-weight:700;letter-spacing:-.03em}
+.commitline{font:500 18px/1.5 var(--sans);color:#555C69}
+.commitline b{color:#1F7A4D;font-weight:600}
+.commitline i{color:#5B45F5;font-style:normal}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(16,19,24,.09);border:1px solid rgba(16,19,24,.09);border-radius:10px;overflow:hidden}
+.meta div{background:rgba(255,255,255,.72);padding:14px 16px;display:flex;flex-direction:column;gap:4px;color:#101318}
+.meta span{font:600 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#555C69}
+.objective{background:rgba(255,255,255,.85);border:1px solid rgba(16,19,24,.09);border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:10px;color:#101318}
+.objective p{font:19px/1.55 var(--serif);max-width:68ch}
+.objective .out{font:14px/1.5 var(--sans);color:#555C69;max-width:none}
+.objective .out b{color:#101318;font-weight:600}
+
+/* Two-column prose sections */
+.block{display:grid;grid-template-columns:220px 1fr;gap:28px}
+.block .side{display:flex;flex-direction:column;gap:10px}
+.block .side p{font-size:14px;color:var(--muted)}
+.block .body{display:flex;flex-direction:column;gap:14px}
+.block .body p{max-width:68ch;font:17px/1.65 var(--serif)}
+
+/* Course map */
+.map{display:flex;flex-direction:column;gap:12px}
+.bar{display:flex;gap:4px}
+.seg{border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0;text-decoration:none;color:inherit;border:1px solid var(--rule);background:var(--sheet)}
+.seg:hover,.seg:focus-visible{border-color:var(--accent);outline:none}
+.seg.do{background:var(--canary);border-color:transparent;color:#101318}
+.seg.do small,.seg.do em{color:#4A5200}
+.seg b{font:600 12px/1.2 var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seg em{font:500 11px/1.3 var(--sans);font-style:normal;color:var(--muted)}
+.seg small{font:500 12px/1 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;margin-top:auto}
+.legend{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid var(--rule);background:var(--sheet)}
+.legend i.do{background:var(--canary);border-color:transparent}
+
+/* Screen */
+.screen{display:grid;grid-template-columns:200px 1fr;gap:28px;padding-top:32px;border-top:1px solid var(--rule);scroll-margin-top:20px}
+.s-side{display:flex;flex-direction:column;gap:10px;position:sticky;top:20px;align-self:start}
+.s-num{font:600 13px/1 var(--mono);color:var(--accent);letter-spacing:.08em}
+.s-side h2{font-size:24px;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font:500 12px/1 var(--mono);padding:5px 8px;border-radius:999px;background:var(--soft);color:var(--muted);font-variant-numeric:tabular-nums}
+.tag.promo{background:var(--warn-soft);color:var(--warn)}
+.s-main{display:flex;flex-direction:column;gap:18px;min-width:0}
+.cap{font:600 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+
+/* Mock */
+.mock{background:var(--term);color:var(--term-ink);border-radius:10px;padding:18px 20px;font:14px/1.7 var(--mono);overflow-x:auto}
+.mock .banner{background:#5A1D1D;color:#F4C7C0;border-radius:6px;padding:8px 12px;margin-bottom:12px;font-family:var(--sans);font-size:14px}
+.mock .note{background:#2D2D30;border-radius:6px;padding:8px 12px;margin-bottom:12px;font-family:var(--sans);font-size:14px}
+.mock .row{display:flex;gap:18px;white-space:pre}
+.mock .hash{color:var(--term-warn)}
+.mock .q{margin-top:12px;color:#fff;font-family:var(--sans);font-weight:600}
+.mock .hit{background:rgba(129,184,139,.16);margin-inline:-20px;padding-inline:20px}
+.mock .add{color:var(--term-add)}
+.mock .del{color:var(--term-del)}
+.mock .file{color:var(--term-dim)}
+.pair{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.45fr);gap:12px}
+
+.msg{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;font:500 16px/1 var(--mono)}
+.msg span{padding:10px 12px;border-radius:6px;border:1.5px solid}
+.msg .ty{color:var(--t-feat);border-color:var(--t-feat)}
+.msg .sc{color:var(--t-scope);border-color:var(--t-scope)}
+.msg .de{color:var(--ink);border-color:var(--rule)}
+.msg .neutral{color:var(--ink);border-color:var(--rule);background:var(--sheet)}
+.msg .wrong{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.msg .right{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.msg sup{font:600 11px/1 var(--sans);margin-right:6px;vertical-align:4px;opacity:.8}
+.states{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+.anat{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.anat th{font:600 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);background:var(--soft)}
+.anat td{padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+.anat tr:last-child td{border-bottom:0}
+.nb{display:inline-flex;width:22px;height:22px;border-radius:50%;align-items:center;justify-content:center;font:600 12px/1 var(--sans);border:1.5px solid}
+.ty-b{color:var(--t-feat);border-color:var(--t-feat)}.sc-b{color:var(--t-scope);border-color:var(--t-scope)}.de-b{color:var(--ink);border-color:var(--rule)}
+
+.rules{counter-reset:r;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;list-style:none;padding:0;margin:0}
+.rules li{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.45;display:flex;gap:10px}
+.rules li::before{counter-increment:r;content:counter(r);font:600 13px/1.45 var(--mono);color:var(--accent)}
+.rules small{display:block;color:var(--muted);margin-top:4px}
+
+/* Storyboard table: same rows, same order, every screen */
+.spec{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--sheet)}
+.spec dl{margin:0;display:grid;grid-template-columns:170px 1fr}
+.spec dt,.spec dd{padding:12px 16px;border-top:1px solid var(--rule);margin:0}
+.spec dt:first-of-type,.spec dd:first-of-type{border-top:0}
+.spec dt{font:600 12px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--soft)}
+.spec dd{font:15px/1.6 var(--serif)}
+.spec dd.say{font-style:italic}
+.spec dd.tech{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.spec dt.tech{background:var(--accent-soft);color:var(--accent)}
+.spec dd ul{margin:0;padding-left:18px}
+.spec dd li+li{margin-top:4px}
+
+/* Options & feedback */
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1px solid var(--rule);border-radius:10px;background:var(--sheet);display:grid;grid-template-columns:44px 1fr;overflow:hidden}
+.opt .k{display:flex;align-items:flex-start;justify-content:center;padding-top:14px;font:600 14px/1 var(--mono);color:var(--muted);background:var(--soft)}
+.opt.ok{border-color:var(--good)}
+.opt.ok .k{background:var(--good-soft);color:var(--good)}
+.opt .b{padding:12px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.opt .b code{font-size:14px;overflow-wrap:anywhere}
+.opt .fb{font:14px/1.5 var(--serif);color:var(--muted)}
+.verdict{font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-right:6px}
+.ok .verdict{color:var(--good)}
+.no .verdict{color:var(--bad)}
+
+/* Frames */
+.frames{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+figure{margin:0;display:flex;flex-direction:column;gap:8px}
+figure img{width:100%;height:auto;border-radius:8px;border:1px solid var(--rule);display:block}
+figcaption{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+figcaption b{color:var(--ink);font-weight:600}
+figure.wide{grid-column:1 / -1}
+
+/* Reference card */
+.cheat{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:22px 24px;display:flex;flex-direction:column;gap:16px}
+.cheat .fmt{font:600 20px/1.3 var(--mono)}
+.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 18px;font-size:14px}
+.types code{font-weight:600;color:var(--accent);margin-right:6px}
+.cheat hr{border:0;border-top:1px solid var(--rule);margin:0}
+.habit{font-size:15px}
+.cta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font:600 14px/1 var(--sans);padding:11px 16px;border-radius:999px;background:#101318;color:#fff}
+.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+:root[data-theme="dark"] .btn:not(.alt){background:#ECEEF3;color:#101318}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn:not(.alt){background:#ECEEF3;color:#101318}}
+
+/* Questions + notes */
+.qs{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;font:16px/1.6 var(--serif);max-width:72ch}
+.qs b{font-family:var(--sans);font-weight:600}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:28px;border-top:1px solid var(--rule);padding-top:32px}
+.notes section{display:flex;flex-direction:column;gap:10px}
+.notes p{font:15px/1.6 var(--serif);color:var(--muted);max-width:60ch}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.sw{display:flex;align-items:center;gap:6px;font:500 12px/1 var(--mono);color:var(--muted)}
+.sw i{width:16px;height:16px;border-radius:4px;border:1px solid var(--rule)}
+.foot{font-size:13px;color:var(--faint)}
+
+@media (max-width:900px){ .meta{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:760px){
+  .block,.screen,.notes{grid-template-columns:1fr}
+  .s-side{position:static}
+  .pair,.frames,.rules,.states{grid-template-columns:minmax(0,1fr)}
+  .screen,.block,.notes{grid-template-columns:minmax(0,1fr)}
+  .spec dl{grid-template-columns:1fr}
+  .spec dt{border-top:1px solid var(--rule)}
+  .spec dd{border-top:0}
+  .bar{flex-wrap:wrap}
+  .seg{flex:1 1 30% !important}
+  .anat th:nth-child(3),.anat td:nth-child(3){display:none}
+}
+@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Storyboard · Nebius Academy test assignment</span>
+  <h1>Git Commit Message Generator</h1>
+  <p class="commitline"><b>feat</b>(<i>learning</i>): teach juniors to write, check and fix commit messages</p>
+  <div class="meta">
+    <div><span>Audience</span>Junior developers, 0–2 years</div>
+    <div><span>Duration</span>4 minutes, 6 screens</div>
+    <div><span>Format</span>Narrated, interactive, built in Storyline 360</div>
+    <div><span>Prerequisite</span>Already uses Git and makes commits</div>
+  </div>
+  <div class="objective">
+    <span class="eyebrow">Learning objective</span>
+    <p>After this lesson, a junior developer can generate a commit message with Git Commit Message Generator, check it against the Conventional Commits format, and correct it before committing.</p>
+    <p class="out"><b>Left out on purpose:</b> message body and footers, breaking changes (<code>!</code>), squashing and rewriting history, setting up commitlint. Each is worth its own lesson, and none of them is needed to meet the objective above.</p>
+  </div>
+</header>
+
+<section class="block">
+  <div class="side">
+    <span class="eyebrow">Approach</span>
+    <p>Merrill's First Principles, scaled down to four minutes.</p>
+  </div>
+  <div class="body">
+    <p>I built the lesson on Merrill's First Principles, scaled down to four minutes. It opens with a situation juniors already know, a broken release and a log full of "wip" and "fix", so the format arrives as the answer to something they have just struggled with. The learner is doing something for 2 minutes 20 seconds out of 4, and support fades as they go: first they recognise a good message, then choose between three, then fix one on their own. I present the tool as something that writes the first draft, because the habit I want juniors to leave with is reading a suggestion before accepting it. For the same reason the product is named only twice, in the demo and at the end, since a lesson that sells on every screen stops being trusted.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="side">
+    <span class="eyebrow">Why this format</span>
+    <p>Written storyboard with key frames.</p>
+  </div>
+  <div class="body">
+    <p>The lesson is narrated, so the script carries most of the meaning, and a script is what a reviewer can check line by line. Every screen below uses the same rows in the same order: narration, on screen, learner action, feedback, technical notes. I only mocked up the parts where layout is part of the learning, like the commit log, the IDE and the message segments. The mockups are kept plain on purpose, so review stays on the content and not on colours.</p>
+    <p>The script has already been read by working developers, who checked the Git content for accuracy and clarity (see Technical review below). The next step would be a clickable prototype of screen 5 in Storyline, tested with two or three junior developers before the full build.</p>
+  </div>
+</section>
+
+<section class="map">
+  <span class="eyebrow">Course map · 240 seconds</span>
+  <nav class="bar" aria-label="Screens">
+    <a class="seg do" href="#s1" style="flex:40"><b>1 · Find it</b><em>Problem</em><small>40 s</small></a>
+    <a class="seg" href="#s2" style="flex:35"><b>2 · The rule</b><em>Demonstration</em><small>35 s</small></a>
+    <a class="seg" href="#s3" style="flex:45"><b>3 · The tool</b><em>Demonstration</em><small>45 s</small></a>
+    <a class="seg do" href="#s4" style="flex:40"><b>4 · Choose</b><em>Guided practice</em><small>40 s</small></a>
+    <a class="seg do" href="#s5" style="flex:60"><b>5 · Fix</b><em>Independent practice</em><small>60 s</small></a>
+    <a class="seg" href="#s6" style="flex:20"><b>6 · Use it</b><em>Transfer</em><small>20 s</small></a>
+  </nav>
+  <div class="legend"><span><i class="do"></i>Learner acts · 140 s</span><span><i></i>Learner watches or reads · 100 s</span><span>Linear path. Wrong answers loop back on the same screen, they never skip ahead.</span></div>
+</section>
+
+<!-- SCREEN 1 -->
+<section class="screen" id="s1">
+  <div class="s-side">
+    <span class="s-num">SCREEN 1</span>
+    <h2>Find what broke it</h2>
+    <div class="tags"><span class="tag">40 s</span><span class="tag">Problem · Activation</span></div>
+  </div>
+  <div class="s-main">
+    <div class="pair">
+      <div>
+        <p class="cap">State 1 · Try</p>
+        <div class="mock">
+          <div class="banner">Payment button stopped working after Tuesday's release.</div>
+          <div class="row"><span class="hash">a3f9c21</span>more fixes</div>
+          <div class="row"><span class="hash">7b2e440</span>wip</div>
+          <div class="row"><span class="hash">c81d0f5</span>fix</div>
+          <div class="row"><span class="hash">2d47a19</span>update</div>
+          <div class="row"><span class="hash">9e0b3c7</span>stuff</div>
+          <div class="row"><span class="hash">f52a8dd</span>asdf</div>
+          <p class="q">Which commit broke the payment button?</p>
+        </div>
+      </div>
+      <div>
+        <p class="cap">State 2 · Reveal</p>
+        <div class="mock">
+          <div class="note">Same six commits. Same code. Better messages.</div>
+          <div class="row"><span class="hash">a3f9c21</span>test(cart): add coverage for empty basket</div>
+          <div class="row"><span class="hash">7b2e440</span>docs(readme): update local setup steps</div>
+          <div class="row"><span class="hash">c81d0f5</span>refactor(api): extract request validation</div>
+          <div class="row hit"><span class="hash">2d47a19</span><span class="add">feat(checkout): switch payment button to new endpoint</span></div>
+          <div class="row"><span class="hash">9e0b3c7</span>style(nav): align header icons</div>
+          <div class="row"><span class="hash">f52a8dd</span>chore(deps): bump lodash to 4.17.21</div>
+          <p class="q">Now find it.</p>
+        </div>
+      </div>
+    </div>
+    <div class="spec"><dl>
+      <dt>Narration</dt><dd class="say">"You're on call this week. Since Tuesday's release, customers can't pay. Six commits went out that day. Find the one that broke checkout."</dd>
+      <dt>On screen</dt><dd>Red incident banner fades in first, then the six commits appear under it (State 1). After the first click, the same list swaps to clear messages (State 2).</dd>
+      <dt>Learner action</dt><dd>State 1: clicks any commit. State 2: clicks the commit that caused the bug.</dd>
+      <dt>Feedback</dt><dd>
+        <ul>
+          <li><b>State 1, any click:</b> "You couldn't have known. Neither could whoever wrote these. And honestly, that was probably you, three weeks ago."</li>
+          <li><b>State 2, narration:</b> "Same commits, same code. Only the messages changed. Try again."</li>
+          <li><b>State 2, correct (<code>2d47a19</code>):</b> "Found it in two seconds. Nothing about the code changed. Only the messages did."</li>
+          <li><b>State 2, wrong:</b> "Not that one. Look for the commit that touches checkout."</li>
+        </ul>
+      </dd>
+      <dt class="tech">Technical notes</dt><dd class="tech">One slide, two states. Banner appears 1 s before the list. In State 1 every commit is a hotspot and any click opens the feedback layer, then State 2 loads when narration ends. In State 2, unlimited attempts. After the second wrong click, <code>2d47a19</code> gets a soft highlight. Next unlocks only after the correct click.</dd>
+    </dl></div>
+  </div>
+</section>
+
+<!-- SCREEN 2 -->
+<section class="screen" id="s2">
+  <div class="s-side">
+    <span class="s-num">SCREEN 2</span>
+    <h2>How a good message is built</h2>
+    <div class="tags"><span class="tag">35 s</span><span class="tag">Demonstration</span></div>
+  </div>
+  <div class="s-main">
+    <div class="msg" aria-label="fix(search): ignore extra spaces in queries">
+      <span class="ty"><sup>1</sup>fix</span><span class="sc"><sup>2</sup>(search)</span><span class="de"><sup>3</sup>: ignore extra spaces in queries</span>
+    </div>
+    <table class="anat">
+      <thead><tr><th>#</th><th>Part</th><th>In this message</th><th>What it tells you</th></tr></thead>
+      <tbody>
+        <tr><td><span class="nb ty-b">1</span></td><td><b style="color:var(--t-feat)">Type</b></td><td><code>fix</code></td><td>What kind of change: <code>feat</code>, <code>fix</code>, <code>docs</code>, <code>refactor</code>, <code>test</code>, <code>chore</code>, <code>style</code></td></tr>
+        <tr><td><span class="nb sc-b">2</span></td><td><b style="color:var(--t-scope)">Scope</b></td><td><code>(search)</code></td><td>Which part of the product it touches</td></tr>
+        <tr><td><span class="nb de-b">3</span></td><td><b>Description</b></td><td><code>ignore extra spaces in queries</code></td><td>What's different now, in plain words</td></tr>
+      </tbody>
+    </table>
+    <ol class="rules">
+      <li><span>Say what changed, not which line you edited<small>The "why" goes in the message body.</small></span></li>
+      <li><span>One commit, one purpose</span></li>
+      <li><span>Write it as a command: "add", not "added"</span></li>
+    </ol>
+    <div class="spec"><dl>
+      <dt>Narration</dt><dd class="say">"Every message in that second list had the same three parts. The type says what kind of change it is. The scope says where. And the description says what's different now. Click each part to see how it works."</dd>
+      <dt>On screen</dt><dd>Example message split into three labelled segments. Title: <b>Conventional Commits</b>. Small "why it matters" line under the table: find what broke something · build release notes · help a new teammate read the history. The three rules appear after all segments are opened.</dd>
+      <dt>Learner action</dt><dd>Clicks each segment to open its row.</dd>
+      <dt>Feedback</dt><dd>None. This is a show-me screen. Each opened row gets a tick.</dd>
+      <dt class="tech">Technical notes</dt><dd class="tech">Three hotspots with visited states. Rows are hidden until clicked. Rules fade in once all three are visited, and Next unlocks at the same moment. Segments carry numbers as well as colour.</dd>
+    </dl></div>
+  </div>
+</section>
+
+<!-- SCREEN 3 -->
+<section class="screen" id="s3">
+  <div class="s-side">
+    <span class="s-num">SCREEN 3</span>
+    <h2>The tool, and where you come in</h2>
+    <div class="tags"><span class="tag">45 s</span><span class="tag">Demonstration</span><span class="tag promo">Product mention 1</span></div>
+  </div>
+  <div class="s-main">
+    <div class="frames">
+      <figure><img src="img/beat-1.png" alt="VS Code mockup: two staged files, checkout.js and errors.js, highlighted."><figcaption><b>Beat 1 · Stage your changes</b><span>~6 s</span></figcaption></figure>
+      <figure><img src="img/beat-2.png" alt="The cursor clicks the Generate icon inside the empty message field."><figcaption><b>Beat 2 · Generate</b><span>~6 s</span></figcaption></figure>
+      <figure><img src="img/beat-3.png" alt="The tool proposes fix(payment): show an error when a card is declined."><figcaption><b>Beat 3 · Read the draft</b><span>~8 s</span></figcaption></figure>
+      <figure><img src="img/beat-4.png" alt="The developer replaces payment with checkout and clicks Commit."><figcaption><b>Beat 4 · Adjust, then commit</b><span>~10 s</span></figcaption></figure>
+      <figure class="wide"><img src="img/limit-card.png" alt="Limit card: three unrelated files produce a bundled commit message the tool cannot split."><figcaption><b>Limit card · What stays your job</b><span>~12 s</span></figcaption></figure>
+    </div>
+    <div class="spec"><dl>
+      <dt>Narration</dt><dd class="say">"Remember the clean log from the start? This is the tool that writes messages like that. Stage your changes, click Generate, and read the draft. The type and description are spot on. It chose 'payment' as the scope, but in this project that code lives under 'checkout', so you change one word and commit. The tool writes the draft. You know your project, so you have the last word."</dd>
+      <dt>Narration, limit card</dt><dd class="say">"One thing it can't do for you. If you stage three unrelated changes together, it'll describe all three in one message. Splitting them into separate commits is still up to you."</dd>
+      <dt>On screen</dt><dd>Simplified VS Code, dark theme. Message field with a Generate icon, blue Commit button, two staged files (<code>checkout.js</code>, <code>errors.js</code>). Short caption per beat: Stage · Generate · Read · Adjust. Then the limit card slides in over the code area, with three files, one bundled message and the line <b>One commit, one purpose. That part is still yours.</b></dd>
+      <dt>Learner action</dt><dd>Watches. Can replay.</dd>
+      <dt>Feedback</dt><dd>None.</dd>
+      <dt class="tech">Technical notes</dt><dd class="tech">Built as timed layers from the Figma frames, synced to narration cue points (or a short MP4 recorded from the mockup, whichever is faster to update). The draft message types out character by character in Beat 3 so it reads as generated. Word swap in Beat 4 is animated. Replay button bottom right. Next unlocks when audio ends. Button name and position are placeholders until confirmed by the product team (see questions below).</dd>
+    </dl></div>
+  </div>
+</section>
+
+<!-- SCREEN 4 -->
+<section class="screen" id="s4">
+  <div class="s-side">
+    <span class="s-num">SCREEN 4</span>
+    <h2>Choose the best message</h2>
+    <div class="tags"><span class="tag">40 s</span><span class="tag">Guided practice</span></div>
+  </div>
+  <div class="s-main">
+    <div class="mock">
+      <div class="file">cart.js</div>
+      <div class="del">- const maxItems = 10;</div>
+      <div class="add">+ const maxItems = 20;</div>
+      <p class="q">Same change, three messages. Which one would you commit?</p>
+    </div>
+    <div class="opts">
+      <div class="opt no"><div class="k">A</div><div class="b"><code>fix(cart): update maxItems</code><p class="fb"><span class="verdict">Feedback</span>"Two things. Nothing was broken, a limit went up, so it's a feat and not a fix. And 'update maxItems' names the variable instead of saying what changed for the customer."</p></div></div>
+      <div class="opt ok"><div class="k">B</div><div class="b"><code>feat(cart): allow up to 20 items per order</code><p class="fb"><span class="verdict">Correct</span>"Yes. Right type, clear scope, and the description tells you what customers can do now."</p></div></div>
+      <div class="opt no"><div class="k">C</div><div class="b"><code>feat: change the maxItems constant in cart.js from 10 to 20 as agreed with product</code><p class="fb"><span class="verdict">Feedback</span>"Right type, but no scope, and it describes the line you edited. The part about product belongs in the message body or the pull request."</p></div></div>
+    </div>
+    <div class="spec"><dl>
+      <dt>Narration</dt><dd class="say">"Here's a small change and three ways to describe it. Pick the one you'd want to find in the log a year from now."</dd>
+      <dt>On screen</dt><dd>Diff at the top, three options as cards below, Submit button.</dd>
+      <dt>Learner action</dt><dd>Selects one option and clicks Submit.</dd>
+      <dt>Feedback</dt><dd>Per option, shown above. After the correct answer, narration: <span class="serif" style="font-style:italic">"All three describe the same edit. Only one still makes sense next year."</span></dd>
+      <dt class="tech">Technical notes</dt><dd class="tech">Single-select, options shuffled. Two attempts. After the second wrong answer, B is highlighted with its explanation. Next unlocks after the correct answer is shown. Wording does not claim the tool offers several drafts, so the screen works whatever the tool's UI does.</dd>
+    </dl></div>
+  </div>
+</section>
+
+<!-- SCREEN 5 -->
+<section class="screen" id="s5">
+  <div class="s-side">
+    <span class="s-num">SCREEN 5</span>
+    <h2>Fix the draft</h2>
+    <div class="tags"><span class="tag">60 s</span><span class="tag">Independent practice</span></div>
+  </div>
+  <div class="s-main">
+    <div class="mock">
+      <div class="file">auth/login.js</div>
+      <div class="add">+ &lt;input type="checkbox" id="remember-me" /&gt;</div>
+      <div class="add">+ if (rememberMe) setSessionDuration(30 * DAY);</div>
+      <p class="q">This draft needs one change before you commit. Click the part that's off.</p>
+    </div>
+    <div class="states">
+      <div>
+        <p class="cap">Start state · all parts look the same</p>
+        <div class="msg"><span class="neutral">fix</span><span class="neutral">(auth)</span><span class="neutral">: let users stay signed in for 30 days</span></div>
+      </div>
+      <div>
+        <p class="cap">After step 2 · corrected</p>
+        <div class="msg"><span class="right">feat</span><span class="neutral">(auth)</span><span class="neutral">: let users stay signed in for 30 days</span></div>
+      </div>
+    </div>
+    <div class="spec"><dl>
+      <dt>Narration</dt><dd class="say">"Your turn. This change adds a 'remember me' box to the login page. Here's the draft. One part needs changing before you commit. Find it."</dd>
+      <dt>On screen</dt><dd>Diff at the top. Draft message below, split into three clickable parts, all in the same neutral style so nothing gives the answer away. Step 2 appears under the message once the right part is found.</dd>
+      <dt>Learner action</dt><dd>Step 1: clicks the part that's wrong. Step 2: picks the right type from <code>feat</code> · <code>refactor</code> · <code>chore</code>.</dd>
+      <dt>Feedback</dt><dd>
+        <ul>
+          <li><b>Clicks scope:</b> "The scope is fine. This change lives in authentication. Look again."</li>
+          <li><b>Clicks description:</b> "The description works. It says what users can do now. Look again."</li>
+          <li><b>Clicks type:</b> "That's it. Nothing was broken here. So what kind of change is it?"</li>
+          <li><b>Picks feat:</b> "Right. It's a new capability. Final message: <code>feat(auth): let users stay signed in for 30 days</code>."</li>
+          <li><b>Picks refactor:</b> "A refactor changes how code is organised but not what it does. Here users get something new."</li>
+          <li><b>Picks chore:</b> "Chores are maintenance users never notice. They'll notice this one."</li>
+        </ul>
+      </dd>
+      <dt class="tech">Technical notes</dt><dd class="tech">Step 1: three labelled buttons ("type: fix", "scope: auth", "description"), unlimited attempts, each wrong click shows its hint layer. Correct click marks the type in red with the label "needs a change" and reveals step 2. Step 2: two attempts, then <code>feat</code> is shown with the explanation. The word swaps in place in the message. Closing narration after success: <span class="serif" style="font-style:italic">"Nothing was broken, so it isn't a fix. That's the check to make every time."</span> Next unlocks after that line.</dd>
+    </dl></div>
+  </div>
+</section>
+
+<!-- SCREEN 6 -->
+<section class="screen" id="s6">
+  <div class="s-side">
+    <span class="s-num">SCREEN 6</span>
+    <h2>Use it on your next commit</h2>
+    <div class="tags"><span class="tag">20 s</span><span class="tag">Transfer</span><span class="tag promo">Product mention 2</span></div>
+  </div>
+  <div class="s-main">
+    <div class="cheat">
+      <span class="eyebrow">Reference card · also downloadable as PDF</span>
+      <p class="fmt">type(scope): what changed</p>
+      <div class="types">
+        <span><code>feat</code>new capability</span>
+        <span><code>fix</code>something was broken</span>
+        <span><code>refactor</code>same behaviour, different code</span>
+        <span><code>docs</code>documentation</span>
+        <span><code>test</code>tests</span>
+        <span><code>style</code>formatting only</span>
+        <span><code>chore</code>maintenance</span>
+      </div>
+      <ol class="rules">
+        <li><span>Say what changed, not which line you edited</span></li>
+        <li><span>One commit, one purpose</span></li>
+        <li><span>Write it as a command: "add", not "added"</span></li>
+      </ol>
+      <hr>
+      <p class="habit"><b>Every time:</b> generate, read, fix what's off, commit.</p>
+      <div class="cta"><span class="btn">Add to VS Code</span><span class="btn">Add to IntelliJ</span><span class="btn alt">Try it in the browser</span></div>
+    </div>
+    <div class="spec"><dl>
+      <dt>Narration</dt><dd class="say">"That's the whole habit. Generate, read, fix what's off, commit. Add the plugin to your IDE, or try it in the browser, and use it on your very next commit."</dd>
+      <dt>On screen</dt><dd>Reference card with the format, the seven types, the three rules and the habit line. Three install buttons.</dd>
+      <dt>Learner action</dt><dd>Optional: downloads the card, clicks an install link.</dd>
+      <dt>Feedback</dt><dd>None.</dd>
+      <dt class="tech">Technical notes</dt><dd class="tech">Buttons open marketplace pages in a new tab, links to be supplied by the product team. Download button for a one-page PDF of the card. Completion is sent to the LMS when this screen loads. Install clicks are tracked as an xAPI statement so we can see how many learners actually try the tool.</dd>
+    </dl></div>
+  </div>
+</section>
+
+<section class="block" id="review" style="border-top:1px solid var(--rule);padding-top:32px">
+  <div class="side">
+    <span class="eyebrow">Technical review</span>
+    <p>Who checked the content.</p>
+  </div>
+  <div class="body">
+    <p>The storyboard was reviewed by working developers for accuracy of the Git and Conventional Commits content and for clarity of the tasks.</p>
+    <ul class="qs">
+      <li><b>Alexandr Tsaplin</b>, Software Engineer at Pinely · <a href="https://www.linkedin.com/in/alexandrts/" target="_blank" rel="noopener" style="color:var(--accent)">LinkedIn</a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block" style="border-top:1px solid var(--rule);padding-top:32px">
+  <div class="side">
+    <span class="eyebrow">Questions for the product team</span>
+    <p>What I assumed, and what I'd confirm before building.</p>
+  </div>
+  <div class="body">
+    <ol class="qs">
+      <li><b>Where is the Generate button?</b> Screen 3 uses an icon inside the VS Code message field as a placeholder. I'd need the real name and position in VS Code, IntelliJ and the web app.</li>
+      <li><b>One draft or several?</b> Screen 4 is worded so it works either way, but the demo narration should match what the tool really does.</li>
+      <li><b>Can it learn a project's own scopes,</b> for example from a commitlint config? If yes, the scope fix in screen 3 turns into a one-line setup tip, which is a nicer story for the product.</li>
+      <li><b>Which links and tracking</b> should the last screen use?</li>
+    </ol>
+  </div>
+</section>
+
+<div class="notes">
+  <section>
+    <span class="eyebrow">Accessibility</span>
+    <p>Colour never carries meaning on its own. Segments on screens 2 and 5 have numbers or text labels too, and the warning on the limit card has an icon and a heading. Everything clickable is a real button that works by keyboard, in reading order. Narration is captioned, and the lesson works with the sound off, because each narrated point also shows up on screen as a keyword or a code sample. Code is live text, not images, so screen readers can read it and it scales without blurring.</p>
+  </section>
+  <section>
+    <span class="eyebrow">Production and evaluation</span>
+    <p>Built in Storyline 360 rather than Rise, because screens 1 and 5 need state changes and a two-step interaction that Rise blocks can't handle cleanly. Estimate: 6 to 8 hours plus narration recording. Screen 3 is the only custom animation, made from the Figma frames in the VS Code Dark+ palette. To see whether it worked, I'd look at first-try accuracy on screen 5 and at how many learners click an install button.</p>
+    <div class="swatches">
+      <span class="sw"><i style="background:#1E1E1E"></i>#1E1E1E</span>
+      <span class="sw"><i style="background:#252526"></i>#252526</span>
+      <span class="sw"><i style="background:#CCCCCC"></i>#CCCCCC</span>
+      <span class="sw"><i style="background:#0E639C"></i>#0E639C</span>
+      <span class="sw"><i style="background:#81B88B"></i>#81B88B</span>
+      <span class="sw"><i style="background:#D7BA7D"></i>#D7BA7D</span>
+    </div>
+  </section>
+</div>
+
+<p class="foot">Storyboard by Mariia Mukhina · Product and scenario per the assignment brief · Drafted with AI assistance; learning design decisions, review and Figma frames by the author.</p>
+</div>
+</body>
+</html>
