@@ -1,543 +1,333 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Commit Message Storyboard</title>
+<title>AI Skills Map · Consulting</title>
+<meta name="description" content="Concept case by Mariia: a one-page AI skills map for consulting roles and role-based AI learning journeys, with measurement and governance.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#FAFAFC; --sheet:#FFFFFF; --ink:#101318; --muted:#555C69; --faint:#8A909C;
-  --rule:#E6E7EE; --soft:#F3F3F8; --accent:#5B45F5; --accent-soft:#ECE9FF;
-  --canary:#EFFFA8;
-  --good:#1F7A4D; --good-soft:#E4F2EA; --bad:#B03A2E; --bad-soft:#FBE7E4;
-  --warn:#5A6300; --warn-soft:#F4FFC4;
-  --term:#1E1E1E; --term-ink:#CCCCCC; --term-dim:#8B8B8B;
-  --term-add:#81B88B; --term-del:#E06C75; --term-warn:#D7BA7D;
-  --t-feat:#1F7A4D; --t-scope:#5B45F5;
-  --sans:"Inter Tight", Arial, -apple-system, Helvetica, sans-serif;
-  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
-  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --paper:#FAF8F4; --card:#FFFFFF; --ink:#14213D; --muted:#5B6474; --line:#E4DFD6;
+  --accent:#0E7C7B; --accent-soft:#E3F1F0; --warm:#C9821F; --warm-soft:#FBF0DE;
+  --l0:#F1EEE8; --l1:#CFE7E5; --l2:#8CC7C3; --l3:#3E9E9A; --l4:#0B5E5D; --l-ink:#14213D; --l-ink-dark:#FFFFFF;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --paper:#0F1116; --sheet:#171A21; --ink:#ECEEF3; --muted:#A5ABB8; --faint:#7E8594;
-    --rule:#2A2E38; --soft:#1F232B; --accent:#9D8CFF; --accent-soft:#262147;
-    --good:#6CC596; --good-soft:#123024; --bad:#F08C7E; --bad-soft:#3A1E1B;
-    --warn:#E3F58A; --warn-soft:#2A2F12;
-    --t-feat:#6CC596; --t-scope:#9D8CFF;
+    --paper:#10151F; --card:#171E2B; --ink:#E9ECF2; --muted:#9AA3B2; --line:#2A3344;
+    --accent:#4FC1BC; --accent-soft:#16302F; --warm:#E9A23B; --warm-soft:#2E2414;
+    --l0:#1D2533; --l1:#1E3B3B; --l2:#22605E; --l3:#2E8A86; --l4:#4FC1BC; --l-ink:#E9ECF2; --l-ink-dark:#0E1420;
   }
 }
 :root[data-theme="dark"]{
-  color-scheme:dark;
-  --paper:#0F1116; --sheet:#171A21; --ink:#ECEEF3; --muted:#A5ABB8; --faint:#7E8594;
-  --rule:#2A2E38; --soft:#1F232B; --accent:#9D8CFF; --accent-soft:#262147;
-  --good:#6CC596; --good-soft:#123024; --bad:#F08C7E; --bad-soft:#3A1E1B;
-  --warn:#E3F58A; --warn-soft:#2A2F12;
-  --t-feat:#6CC596; --t-scope:#9D8CFF;
+  --paper:#10151F; --card:#171E2B; --ink:#E9ECF2; --muted:#9AA3B2; --line:#2A3344;
+  --accent:#4FC1BC; --accent-soft:#16302F; --warm:#E9A23B; --warm-soft:#2E2414;
+  --l0:#1D2533; --l1:#1E3B3B; --l2:#22605E; --l3:#2E8A86; --l4:#4FC1BC; --l-ink:#E9ECF2; --l-ink-dark:#0E1420;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);padding-inline:20px;padding-block:40px 80px}
-img{max-width:100%}
-.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
-h1,h2,h3{text-wrap:balance;margin:0;line-height:1.15;font-family:var(--sans)}
-p{margin:0}
-code{font-family:var(--mono);font-size:.9em}
-.eyebrow{font:600 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.serif{font-family:var(--serif)}
-
-/* Header */
-header{display:flex;flex-direction:column;gap:20px;border-radius:24px;padding:40px clamp(20px,4vw,48px);color:#101318;border:1px solid #E6E7EE;
-  background:
-    radial-gradient(55% 90% at 8% 0%, #DCD6FF 0%, transparent 65%),
-    radial-gradient(45% 80% at 92% 5%, #FFDCEC 0%, transparent 65%),
-    radial-gradient(55% 90% at 85% 100%, #F2FFB5 0%, transparent 65%),
-    radial-gradient(45% 80% at 0% 100%, #CFF3E3 0%, transparent 65%),
-    #FFFFFF}
-header .eyebrow{color:#555C69}
-header h1{font-size:clamp(34px,5.5vw,58px);font-weight:700;letter-spacing:-.03em}
-.commitline{font:500 18px/1.5 var(--sans);color:#555C69}
-.commitline b{color:#1F7A4D;font-weight:600}
-.commitline i{color:#5B45F5;font-style:normal}
-.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(16,19,24,.09);border:1px solid rgba(16,19,24,.09);border-radius:10px;overflow:hidden}
-.meta div{background:rgba(255,255,255,.72);padding:14px 16px;display:flex;flex-direction:column;gap:4px;color:#101318}
-.meta span{font:600 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#555C69}
-.objective{background:rgba(255,255,255,.85);border:1px solid rgba(16,19,24,.09);border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:10px;color:#101318}
-.objective p{font:19px/1.55 var(--serif);max-width:68ch}
-.objective .out{font:14px/1.5 var(--sans);color:#555C69;max-width:none}
-.objective .out b{color:#101318;font-weight:600}
-
-/* Two-column prose sections */
-.block{display:grid;grid-template-columns:220px 1fr;gap:28px}
-.block .side{display:flex;flex-direction:column;gap:10px}
-.block .side p{font-size:14px;color:var(--muted)}
-.block .body{display:flex;flex-direction:column;gap:14px}
-.block .body p{max-width:68ch;font:17px/1.65 var(--serif)}
-
-/* Course map */
-.map{display:flex;flex-direction:column;gap:12px}
-.bar{display:flex;gap:4px}
-.seg{border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0;text-decoration:none;color:inherit;border:1px solid var(--rule);background:var(--sheet)}
-.seg:hover,.seg:focus-visible{border-color:var(--accent);outline:none}
-.seg.do{background:var(--canary);border-color:transparent;color:#101318}
-.seg.do small,.seg.do em{color:#4A5200}
-.seg b{font:600 12px/1.2 var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.seg em{font:500 11px/1.3 var(--sans);font-style:normal;color:var(--muted)}
-.seg small{font:500 12px/1 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;margin-top:auto}
-.legend{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--muted)}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid var(--rule);background:var(--sheet)}
-.legend i.do{background:var(--canary);border-color:transparent}
-
-/* Screen */
-.screen{display:grid;grid-template-columns:200px 1fr;gap:28px;padding-top:32px;border-top:1px solid var(--rule);scroll-margin-top:20px}
-.s-side{display:flex;flex-direction:column;gap:10px;position:sticky;top:20px;align-self:start}
-.s-num{font:600 13px/1 var(--mono);color:var(--accent);letter-spacing:.08em}
-.s-side h2{font-size:24px;font-weight:700}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font:500 12px/1 var(--mono);padding:5px 8px;border-radius:999px;background:var(--soft);color:var(--muted);font-variant-numeric:tabular-nums}
-.tag.promo{background:var(--warn-soft);color:var(--warn)}
-.s-main{display:flex;flex-direction:column;gap:18px;min-width:0}
-.cap{font:600 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
-
-/* Mock */
-.mock{background:var(--term);color:var(--term-ink);border-radius:10px;padding:18px 20px;font:14px/1.7 var(--mono);overflow-x:auto}
-.mock .banner{background:#5A1D1D;color:#F4C7C0;border-radius:6px;padding:8px 12px;margin-bottom:12px;font-family:var(--sans);font-size:14px}
-.mock .note{background:#2D2D30;border-radius:6px;padding:8px 12px;margin-bottom:12px;font-family:var(--sans);font-size:14px}
-.mock .row{display:flex;gap:18px;white-space:pre}
-.mock .hash{color:var(--term-warn)}
-.mock .q{margin-top:12px;color:#fff;font-family:var(--sans);font-weight:600}
-.mock .hit{background:rgba(129,184,139,.16);margin-inline:-20px;padding-inline:20px}
-.mock .add{color:var(--term-add)}
-.mock .del{color:var(--term-del)}
-.mock .file{color:var(--term-dim)}
-.pair{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.45fr);gap:12px}
-
-.msg{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;font:500 16px/1 var(--mono)}
-.msg span{padding:10px 12px;border-radius:6px;border:1.5px solid}
-.msg .ty{color:var(--t-feat);border-color:var(--t-feat)}
-.msg .sc{color:var(--t-scope);border-color:var(--t-scope)}
-.msg .de{color:var(--ink);border-color:var(--rule)}
-.msg .neutral{color:var(--ink);border-color:var(--rule);background:var(--sheet)}
-.msg .wrong{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
-.msg .right{color:var(--good);border-color:var(--good);background:var(--good-soft)}
-.msg sup{font:600 11px/1 var(--sans);margin-right:6px;vertical-align:4px;opacity:.8}
-.states{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-
-.anat{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
-.anat th{font:600 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);background:var(--soft)}
-.anat td{padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
-.anat tr:last-child td{border-bottom:0}
-.nb{display:inline-flex;width:22px;height:22px;border-radius:50%;align-items:center;justify-content:center;font:600 12px/1 var(--sans);border:1.5px solid}
-.ty-b{color:var(--t-feat);border-color:var(--t-feat)}.sc-b{color:var(--t-scope);border-color:var(--t-scope)}.de-b{color:var(--ink);border-color:var(--rule)}
-
-.rules{counter-reset:r;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;list-style:none;padding:0;margin:0}
-.rules li{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.45;display:flex;gap:10px}
-.rules li::before{counter-increment:r;content:counter(r);font:600 13px/1.45 var(--mono);color:var(--accent)}
-.rules small{display:block;color:var(--muted);margin-top:4px}
-
-/* Storyboard table: same rows, same order, every screen */
-.spec{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--sheet)}
-.spec dl{margin:0;display:grid;grid-template-columns:170px 1fr}
-.spec dt,.spec dd{padding:12px 16px;border-top:1px solid var(--rule);margin:0}
-.spec dt:first-of-type,.spec dd:first-of-type{border-top:0}
-.spec dt{font:600 12px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--soft)}
-.spec dd{font:15px/1.6 var(--serif)}
-.spec dd.say{font-style:italic}
-.spec dd.tech{font-family:var(--sans);font-size:14px;color:var(--muted)}
-.spec dt.tech{background:var(--accent-soft);color:var(--accent)}
-.spec dd ul{margin:0;padding-left:18px}
-.spec dd li+li{margin-top:4px}
-
-/* Options & feedback */
-.opts{display:flex;flex-direction:column;gap:10px}
-.opt{border:1px solid var(--rule);border-radius:10px;background:var(--sheet);display:grid;grid-template-columns:44px 1fr;overflow:hidden}
-.opt .k{display:flex;align-items:flex-start;justify-content:center;padding-top:14px;font:600 14px/1 var(--mono);color:var(--muted);background:var(--soft)}
-.opt.ok{border-color:var(--good)}
-.opt.ok .k{background:var(--good-soft);color:var(--good)}
-.opt .b{padding:12px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
-.opt .b code{font-size:14px;overflow-wrap:anywhere}
-.opt .fb{font:14px/1.5 var(--serif);color:var(--muted)}
-.verdict{font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-right:6px}
-.ok .verdict{color:var(--good)}
-.no .verdict{color:var(--bad)}
-
-/* Frames */
-.frames{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-figure{margin:0;display:flex;flex-direction:column;gap:8px}
-figure img{width:100%;height:auto;border-radius:8px;border:1px solid var(--rule);display:block}
-figcaption{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
-figcaption b{color:var(--ink);font-weight:600}
-figure.wide{grid-column:1 / -1}
-
-/* Reference card */
-.cheat{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:22px 24px;display:flex;flex-direction:column;gap:16px}
-.cheat .fmt{font:600 20px/1.3 var(--mono)}
-.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 18px;font-size:14px}
-.types code{font-weight:600;color:var(--accent);margin-right:6px}
-.cheat hr{border:0;border-top:1px solid var(--rule);margin:0}
-.habit{font-size:15px}
-.cta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.btn{font:600 14px/1 var(--sans);padding:11px 16px;border-radius:999px;background:#101318;color:#fff}
-.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--ink)}
-:root[data-theme="dark"] .btn:not(.alt){background:#ECEEF3;color:#101318}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn:not(.alt){background:#ECEEF3;color:#101318}}
-
-/* Questions + notes */
-.qs{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;font:16px/1.6 var(--serif);max-width:72ch}
-.qs b{font-family:var(--sans);font-weight:600}
-.notes{display:grid;grid-template-columns:1fr 1fr;gap:28px;border-top:1px solid var(--rule);padding-top:32px}
-.notes section{display:flex;flex-direction:column;gap:10px}
-.notes p{font:15px/1.6 var(--serif);color:var(--muted);max-width:60ch}
-.swatches{display:flex;flex-wrap:wrap;gap:8px}
-.sw{display:flex;align-items:center;gap:6px;font:500 12px/1 var(--mono);color:var(--muted)}
-.sw i{width:16px;height:16px;border-radius:4px;border:1px solid var(--rule)}
-.foot{font-size:13px;color:var(--faint)}
-
-@media (max-width:900px){ .meta{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:760px){
-  .block,.screen,.notes{grid-template-columns:1fr}
-  .s-side{position:static}
-  .pair,.frames,.rules,.states{grid-template-columns:minmax(0,1fr)}
-  .screen,.block,.notes{grid-template-columns:minmax(0,1fr)}
-  .spec dl{grid-template-columns:1fr}
-  .spec dt{border-top:1px solid var(--rule)}
-  .spec dd{border-top:0}
-  .bar{flex-wrap:wrap}
-  .seg{flex:1 1 30% !important}
-  .anat th:nth-child(3),.anat td:nth-child(3){display:none}
-}
-@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 "IBM Plex Sans",system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,5vw,3.3rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:.4rem}
+h3{font-size:1.2rem}
+p{margin:.5rem 0}
+.mono{font-family:"IBM Plex Mono",monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.eyebrow{color:var(--accent)}
+.muted{color:var(--muted)}
+header.hero{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+.hero .lede{font-size:1.15rem;max-width:760px;color:var(--muted);margin-top:14px}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:28px}
+.meta div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.meta b{display:block;font-size:.95rem}
+section{padding:48px 0;border-bottom:1px solid var(--line)}
+.intro{max-width:760px;color:var(--muted)}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card .num{font-family:"Newsreader",serif;font-size:2rem;color:var(--accent);line-height:1}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:22px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.steps div{padding:18px;border-right:1px solid var(--line)}
+.steps div:last-child{border-right:none}
+@media (max-width:640px){.steps div{border-right:none;border-bottom:1px solid var(--line)}.steps div:last-child{border-bottom:none}}
+/* Matrix */
+.matrix-box{margin-top:24px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.matrix{border-collapse:separate;border-spacing:4px;width:100%;min-width:720px}
+.matrix th{font-weight:600;font-size:.82rem;text-align:center;vertical-align:bottom;padding:6px 4px;color:var(--ink)}
+.matrix th small{display:block;font-weight:400;color:var(--muted);font-size:.72rem}
+.matrix th.unit{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.06em;color:var(--accent)}
+.matrix td.skill{text-align:left;font-size:.9rem;padding:8px 10px 8px 0;min-width:220px}
+.matrix td.skill b{display:block;font-weight:600}
+.matrix td.skill span{font-size:.78rem;color:var(--muted)}
+.tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.06em;padding:1px 6px;border-radius:99px;background:var(--warm-soft);color:var(--warm);margin-left:6px;vertical-align:middle;text-transform:uppercase}
+.lv{width:16%;height:52px;border-radius:8px;text-align:center;font-weight:600;font-size:.95rem;cursor:default;position:relative}
+.lv i{display:block;font-style:normal;font-weight:400;font-size:.68rem;opacity:.85}
+.lv1{background:var(--l1);color:var(--l-ink)}.lv2{background:var(--l2);color:var(--l-ink)}
+.lv3{background:var(--l3);color:#fff}.lv4{background:var(--l4);color:var(--l-ink-dark)}
+:root:not([data-theme="dark"]) .lv4{color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lv4{color:var(--l-ink-dark)}}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:18px}
+.legend div{display:flex;gap:10px;align-items:flex-start;font-size:.85rem}
+.sw{flex:0 0 22px;height:22px;border-radius:6px}
+.callout{margin-top:18px;background:var(--warm-soft);border-left:4px solid var(--warm);border-radius:8px;padding:14px 16px;font-size:.92rem}
+.gap{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}
+.bar{margin:10px 0}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.82rem}
+.track{position:relative;height:10px;background:var(--l0);border-radius:99px;margin-top:4px}
+.fill{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:99px}
+.target{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--warm);border-radius:2px}
+/* Tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tabs button{font:inherit;font-size:.9rem;font-weight:500;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 14px;border-radius:99px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.journey{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.jhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-end;border-bottom:1px solid var(--line);padding-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:.78rem;background:var(--accent-soft);color:var(--accent);padding:3px 10px;border-radius:99px;font-weight:500}
+ol.phases{list-style:none;margin:18px 0 0;padding:0;position:relative}
+ol.phases li{position:relative;padding:0 0 22px 44px}
+ol.phases li::before{content:"";position:absolute;left:15px;top:30px;bottom:0;width:2px;background:var(--line)}
+ol.phases li:last-child::before{display:none}
+.dot{position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.85rem}
+.ph-top{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.ph-top .when{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--muted)}
+.ph-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:8px;font-size:.88rem}
+.ph-grid div{background:var(--paper);border-radius:8px;padding:10px 12px}
+.ph-grid b{display:block;font-size:.7rem;font-family:"IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:2px}
+/* Measurement */
+.chain{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:22px}
+.chain .card h3{display:flex;align-items:center;gap:8px}
+.chain ul,.triage ul{margin:8px 0 0;padding-left:18px;font-size:.9rem}
+.triage{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+.triage .card{border-top:4px solid var(--accent)}
+.triage .card:nth-child(2){border-top-color:var(--warm)}
+.triage .card:nth-child(3){border-top-color:var(--muted)}
+.triage .card:nth-child(4){border-top-color:var(--ink)}
+.plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:22px}
+.plan .card ul{padding-left:18px;margin:8px 0 0;font-size:.92rem}
+footer{padding:36px 0 56px;color:var(--muted);font-size:.85rem}
+footer a{color:var(--accent)}
+.toggle{position:fixed;right:16px;bottom:16px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:8px 12px;font:inherit;font-size:.8rem;cursor:pointer}
 </style>
 </head>
 <body>
-<div class="wrap">
-
-<header>
-  <span class="eyebrow">Storyboard · Nebius Academy test assignment</span>
-  <h1>Git Commit Message Generator</h1>
-  <p class="commitline"><b>feat</b>(<i>learning</i>): teach juniors to write, check and fix commit messages</p>
-  <div class="meta">
-    <div><span>Audience</span>Junior developers, 0–2 years</div>
-    <div><span>Duration</span>4 minutes, 6 screens</div>
-    <div><span>Format</span>Narrated, interactive, built in Storyline 360</div>
-    <div><span>Prerequisite</span>Already uses Git and makes commits</div>
-  </div>
-  <div class="objective">
-    <span class="eyebrow">Learning objective</span>
-    <p>After this lesson, a junior developer can generate a commit message with Git Commit Message Generator, check it against the Conventional Commits format, and correct it before committing.</p>
-    <p class="out"><b>Left out on purpose:</b> message body and footers, breaking changes (<code>!</code>), squashing and rewriting history, setting up commitlint. Each is worth its own lesson, and none of them is needed to meet the objective above.</p>
+<header class="hero">
+  <div class="wrap">
+    <div class="mono eyebrow">Concept case · L&amp;D strategy · AI capability building</div>
+    <h1 style="margin-top:10px">From AI-curious to AI-capable:<br>a skills map and role-based learning journeys for consultants</h1>
+    <p class="lede">A one-page AI skills map for five consulting roles across Technology &amp; Transformation and Strategy, Risk &amp; Transactions, a worked learning journey for each priority role, and the measurement and governance that keep the portfolio current.</p>
+    <div class="meta">
+      <div><span class="mono muted">Audience</span><b>Consultants in T&amp;T and SR&amp;T, analyst to director</b></div>
+      <div><span class="mono muted">My role</span><b>Skills analysis, journey design, measurement model</b></div>
+      <div><span class="mono muted">Methods</span><b>Skills mapping · 70-20-10 · scenario-based learning · LTEM-style evaluation</b></div>
+      <div><span class="mono muted">Format</span><b>Self-initiated concept, October 2026</b></div>
+    </div>
   </div>
 </header>
 
-<section class="block">
-  <div class="side">
-    <span class="eyebrow">Approach</span>
-    <p>Merrill's First Principles, scaled down to four minutes.</p>
-  </div>
-  <div class="body">
-    <p>I built the lesson on Merrill's First Principles, scaled down to four minutes. It opens with a situation juniors already know, a broken release and a log full of "wip" and "fix", so the format arrives as the answer to something they have just struggled with. The learner is doing something for 2 minutes 20 seconds out of 4, and support fades as they go: first they recognise a good message, then choose between three, then fix one on their own. I present the tool as something that writes the first draft, because the habit I want juniors to leave with is reading a suggestion before accepting it. For the same reason the product is named only twice, in the demo and at the end, since a lesson that sells on every screen stops being trusted.</p>
-  </div>
-</section>
-
-<section class="block">
-  <div class="side">
-    <span class="eyebrow">Why this format</span>
-    <p>Written storyboard with key frames.</p>
-  </div>
-  <div class="body">
-    <p>The lesson is narrated, so the script carries most of the meaning, and a script is what a reviewer can check line by line. Every screen below uses the same rows in the same order: narration, on screen, learner action, feedback, technical notes. I only mocked up the parts where layout is part of the learning, like the commit log, the IDE and the message segments. The mockups are kept plain on purpose, so review stays on the content and not on colours.</p>
-    <p>The script has already been read by working developers, who checked the Git content for accuracy and clarity (see Technical review below). The next step would be a clickable prototype of screen 5 in Storyline, tested with two or three junior developers before the full build.</p>
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">01 · The challenge</div>
+    <h2>AI moves faster than a course catalogue</h2>
+    <p class="intro">In a consulting firm, "AI skills" mean different things for a data engineer, a risk advisor and a deals analyst. A single generic AI course creates awareness but rarely changes how people deliver client work. The learning offering needs to be role-specific, tied to real tasks, and refreshed as tools and regulation change.</p>
+    <div class="grid3">
+      <div class="card"><div class="num">1</div><h3>Different roles, different gaps</h3><p class="muted">Engineers need evaluation and agent design; risk advisors need regulation and output verification; leaders need to scope and price AI-enabled work.</p></div>
+      <div class="card"><div class="num">2</div><h3>Knowing ≠ using</h3><p class="muted">Completion rates say little. What matters is whether people use approved AI tools safely on billable work and improve quality or speed.</p></div>
+      <div class="card"><div class="num">3</div><h3>Content goes stale</h3><p class="muted">Tool-specific modules age in months. The portfolio needs a regular keep / refresh / retire rhythm, plus an AI-literacy duty for staff under the EU AI Act (Art. 4).</p></div>
+    </div>
   </div>
 </section>
 
-<section class="map">
-  <span class="eyebrow">Course map · 240 seconds</span>
-  <nav class="bar" aria-label="Screens">
-    <a class="seg do" href="#s1" style="flex:40"><b>1 · Find it</b><em>Problem</em><small>40 s</small></a>
-    <a class="seg" href="#s2" style="flex:35"><b>2 · The rule</b><em>Demonstration</em><small>35 s</small></a>
-    <a class="seg" href="#s3" style="flex:45"><b>3 · The tool</b><em>Demonstration</em><small>45 s</small></a>
-    <a class="seg do" href="#s4" style="flex:40"><b>4 · Choose</b><em>Guided practice</em><small>40 s</small></a>
-    <a class="seg do" href="#s5" style="flex:60"><b>5 · Fix</b><em>Independent practice</em><small>60 s</small></a>
-    <a class="seg" href="#s6" style="flex:20"><b>6 · Use it</b><em>Transfer</em><small>20 s</small></a>
-  </nav>
-  <div class="legend"><span><i class="do"></i>Learner acts · 140 s</span><span><i></i>Learner watches or reads · 100 s</span><span>Linear path. Wrong answers loop back on the same screen, they never skip ahead.</span></div>
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">02 · Approach</div>
+    <h2>Four connected steps</h2>
+    <div class="steps">
+      <div><span class="mono muted">Diagnose</span><h3>Skills map</h3><p class="muted">Define 8 AI skill domains and target levels per role. Validate with practice leads and a pilot self-assessment.</p></div>
+      <div><span class="mono muted">Design</span><h3>Role journeys</h3><p class="muted">Turn the biggest gaps into short, task-based journeys: learn, apply on own work, get feedback, show evidence.</p></div>
+      <div><span class="mono muted">Engage</span><h3>Adoption</h3><p class="muted">AI Advocates in each team, show-and-tell sessions, a shared prompt and use-case library.</p></div>
+      <div><span class="mono muted">Measure</span><h3>Impact &amp; currency</h3><p class="muted">Track proficiency, tool adoption and task impact; review the portfolio quarterly with a steering group.</p></div>
+    </div>
+  </div>
 </section>
 
-<!-- SCREEN 1 -->
-<section class="screen" id="s1">
-  <div class="s-side">
-    <span class="s-num">SCREEN 1</span>
-    <h2>Find what broke it</h2>
-    <div class="tags"><span class="tag">40 s</span><span class="tag">Problem · Activation</span></div>
-  </div>
-  <div class="s-main">
-    <div class="pair">
-      <div>
-        <p class="cap">State 1 · Try</p>
-        <div class="mock">
-          <div class="banner">Payment button stopped working after Tuesday's release.</div>
-          <div class="row"><span class="hash">a3f9c21</span>more fixes</div>
-          <div class="row"><span class="hash">7b2e440</span>wip</div>
-          <div class="row"><span class="hash">c81d0f5</span>fix</div>
-          <div class="row"><span class="hash">2d47a19</span>update</div>
-          <div class="row"><span class="hash">9e0b3c7</span>stuff</div>
-          <div class="row"><span class="hash">f52a8dd</span>asdf</div>
-          <p class="q">Which commit broke the payment button?</p>
-        </div>
+<section id="map">
+  <div class="wrap">
+    <div class="mono eyebrow">03 · Deliverable 1</div>
+    <h2>AI Skills Map: target proficiency by role</h2>
+    <p class="intro">Eight skill domains × five role segments. Each cell is the target level a fully proficient person in that role should reach. Tags mark fast-moving skills that trigger a content review every quarter.</p>
+    <div class="matrix-box">
+      <div class="scroll">
+        <table class="matrix" aria-label="AI skills map">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="unit" colspan="2">Technology &amp; Transformation</th>
+              <th class="unit" colspan="2">Strategy, Risk &amp; Transactions</th>
+              <th class="unit">Leadership</th>
+            </tr>
+            <tr>
+              <th style="text-align:left">Skill domain</th>
+              <th>Business Consultant<small>transformation, change</small></th>
+              <th>Tech &amp; Data Engineer<small>cloud, data, AI</small></th>
+              <th>Risk Advisory Consultant<small>risk, controls, compliance</small></th>
+              <th>Deals &amp; Transactions Analyst<small>M&amp;A, due diligence</small></th>
+              <th>Engagement Manager / Director<small>scoping, delivery</small></th>
+            </tr>
+          </thead>
+          <tbody id="matrix-body"></tbody>
+        </table>
       </div>
-      <div>
-        <p class="cap">State 2 · Reveal</p>
-        <div class="mock">
-          <div class="note">Same six commits. Same code. Better messages.</div>
-          <div class="row"><span class="hash">a3f9c21</span>test(cart): add coverage for empty basket</div>
-          <div class="row"><span class="hash">7b2e440</span>docs(readme): update local setup steps</div>
-          <div class="row"><span class="hash">c81d0f5</span>refactor(api): extract request validation</div>
-          <div class="row hit"><span class="hash">2d47a19</span><span class="add">feat(checkout): switch payment button to new endpoint</span></div>
-          <div class="row"><span class="hash">9e0b3c7</span>style(nav): align header icons</div>
-          <div class="row"><span class="hash">f52a8dd</span>chore(deps): bump lodash to 4.17.21</div>
-          <p class="q">Now find it.</p>
-        </div>
+      <div class="legend">
+        <div><span class="sw lv1"></span><span><b>1 · Aware</b><br>Explains the concept, knows limits and when to escalate.</span></div>
+        <div><span class="sw lv2"></span><span><b>2 · Practitioner</b><br>Uses approved tools on own tasks with reliable quality.</span></div>
+        <div><span class="sw lv3"></span><span><b>3 · Advanced</b><br>Adapts AI to client work, checks output critically, coaches peers.</span></div>
+        <div><span class="sw lv4"></span><span><b>4 · Lead</b><br>Designs solutions or advice, sets standards, shapes the offering.</span></div>
       </div>
     </div>
-    <div class="spec"><dl>
-      <dt>Narration</dt><dd class="say">"You're on call this week. Since Tuesday's release, customers can't pay. Six commits went out that day. Find the one that broke checkout."</dd>
-      <dt>On screen</dt><dd>Red incident banner fades in first, then the six commits appear under it (State 1). After the first click, the same list swaps to clear messages (State 2).</dd>
-      <dt>Learner action</dt><dd>State 1: clicks any commit. State 2: clicks the commit that caused the bug.</dd>
-      <dt>Feedback</dt><dd>
-        <ul>
-          <li><b>State 1, any click:</b> "You couldn't have known. Neither could whoever wrote these. And honestly, that was probably you, three weeks ago."</li>
-          <li><b>State 2, narration:</b> "Same commits, same code. Only the messages changed. Try again."</li>
-          <li><b>State 2, correct (<code>2d47a19</code>):</b> "Found it in two seconds. Nothing about the code changed. Only the messages did."</li>
-          <li><b>State 2, wrong:</b> "Not that one. Look for the commit that touches checkout."</li>
-        </ul>
-      </dd>
-      <dt class="tech">Technical notes</dt><dd class="tech">One slide, two states. Banner appears 1 s before the list. In State 1 every commit is a hotspot and any click opens the feedback layer, then State 2 loads when narration ends. In State 2, unlimited attempts. After the second wrong click, <code>2d47a19</code> gets a soft highlight. Next unlocks only after the correct click.</dd>
-    </dl></div>
+
+    <h3 style="margin-top:30px">From map to gaps (illustrative pilot data)</h3>
+    <p class="intro">A 15-minute self-assessment plus manager calibration, run against the map, shows where to invest first. Example for the Risk Advisory segment:</p>
+    <div class="gap card" id="gap"></div>
+    <div class="callout"><b>Insight → decision.</b> The largest gap is Responsible AI &amp; regulation, a skill where this role is expected to advise clients. That makes it the first journey to build for SR&amp;T, ahead of generic prompting courses that are already well covered.</div>
   </div>
 </section>
 
-<!-- SCREEN 2 -->
-<section class="screen" id="s2">
-  <div class="s-side">
-    <span class="s-num">SCREEN 2</span>
-    <h2>How a good message is built</h2>
-    <div class="tags"><span class="tag">35 s</span><span class="tag">Demonstration</span></div>
-  </div>
-  <div class="s-main">
-    <div class="msg" aria-label="fix(search): ignore extra spaces in queries">
-      <span class="ty"><sup>1</sup>fix</span><span class="sc"><sup>2</sup>(search)</span><span class="de"><sup>3</sup>: ignore extra spaces in queries</span>
-    </div>
-    <table class="anat">
-      <thead><tr><th>#</th><th>Part</th><th>In this message</th><th>What it tells you</th></tr></thead>
-      <tbody>
-        <tr><td><span class="nb ty-b">1</span></td><td><b style="color:var(--t-feat)">Type</b></td><td><code>fix</code></td><td>What kind of change: <code>feat</code>, <code>fix</code>, <code>docs</code>, <code>refactor</code>, <code>test</code>, <code>chore</code>, <code>style</code></td></tr>
-        <tr><td><span class="nb sc-b">2</span></td><td><b style="color:var(--t-scope)">Scope</b></td><td><code>(search)</code></td><td>Which part of the product it touches</td></tr>
-        <tr><td><span class="nb de-b">3</span></td><td><b>Description</b></td><td><code>ignore extra spaces in queries</code></td><td>What's different now, in plain words</td></tr>
-      </tbody>
-    </table>
-    <ol class="rules">
-      <li><span>Say what changed, not which line you edited<small>The "why" goes in the message body.</small></span></li>
-      <li><span>One commit, one purpose</span></li>
-      <li><span>Write it as a command: "add", not "added"</span></li>
-    </ol>
-    <div class="spec"><dl>
-      <dt>Narration</dt><dd class="say">"Every message in that second list had the same three parts. The type says what kind of change it is. The scope says where. And the description says what's different now. Click each part to see how it works."</dd>
-      <dt>On screen</dt><dd>Example message split into three labelled segments. Title: <b>Conventional Commits</b>. Small "why it matters" line under the table: find what broke something · build release notes · help a new teammate read the history. The three rules appear after all segments are opened.</dd>
-      <dt>Learner action</dt><dd>Clicks each segment to open its row.</dd>
-      <dt>Feedback</dt><dd>None. This is a show-me screen. Each opened row gets a tick.</dd>
-      <dt class="tech">Technical notes</dt><dd class="tech">Three hotspots with visited states. Rows are hidden until clicked. Rules fade in once all three are visited, and Next unlocks at the same moment. Segments carry numbers as well as colour.</dd>
-    </dl></div>
+<section id="journeys">
+  <div class="wrap">
+    <div class="mono eyebrow">04 · Deliverable 2</div>
+    <h2>Role-based learning journeys</h2>
+    <p class="intro">Every journey follows the same rhythm (diagnose, learn, apply on real work, deepen, show evidence), so it is easy to maintain, while content and practice tasks are specific to the role. Roughly 2 hours a week, mostly in the flow of work.</p>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="journey" id="journey" role="tabpanel"></div>
   </div>
 </section>
 
-<!-- SCREEN 3 -->
-<section class="screen" id="s3">
-  <div class="s-side">
-    <span class="s-num">SCREEN 3</span>
-    <h2>The tool, and where you come in</h2>
-    <div class="tags"><span class="tag">45 s</span><span class="tag">Demonstration</span><span class="tag promo">Product mention 1</span></div>
-  </div>
-  <div class="s-main">
-    <div class="frames">
-      <figure><img src="img/beat-1.png" alt="VS Code mockup: two staged files, checkout.js and errors.js, highlighted."><figcaption><b>Beat 1 · Stage your changes</b><span>~6 s</span></figcaption></figure>
-      <figure><img src="img/beat-2.png" alt="The cursor clicks the Generate icon inside the empty message field."><figcaption><b>Beat 2 · Generate</b><span>~6 s</span></figcaption></figure>
-      <figure><img src="img/beat-3.png" alt="The tool proposes fix(payment): show an error when a card is declined."><figcaption><b>Beat 3 · Read the draft</b><span>~8 s</span></figcaption></figure>
-      <figure><img src="img/beat-4.png" alt="The developer replaces payment with checkout and clicks Commit."><figcaption><b>Beat 4 · Adjust, then commit</b><span>~10 s</span></figcaption></figure>
-      <figure class="wide"><img src="img/limit-card.png" alt="Limit card: three unrelated files produce a bundled commit message the tool cannot split."><figcaption><b>Limit card · What stays your job</b><span>~12 s</span></figcaption></figure>
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">05 · Engagement</div>
+    <h2>Making AI learning stick in daily work</h2>
+    <div class="grid3">
+      <div class="card"><h3>AI Advocates</h3><p class="muted">One advocate per team: early access to new tools, a monthly huddle with L&amp;D, and a role in coaching journey participants and flagging adoption barriers.</p></div>
+      <div class="card"><h3>"AI in 15"</h3><p class="muted">Fortnightly 15-minute show-and-tell where a consultant demos one real use case. Recorded, tagged by role, added to the library.</p></div>
+      <div class="card"><h3>Use-case &amp; prompt library</h3><p class="muted">Every journey ends with a use case that goes into a shared library, so learning output becomes reusable practice for the next cohort.</p></div>
     </div>
-    <div class="spec"><dl>
-      <dt>Narration</dt><dd class="say">"Remember the clean log from the start? This is the tool that writes messages like that. Stage your changes, click Generate, and read the draft. The type and description are spot on. It chose 'payment' as the scope, but in this project that code lives under 'checkout', so you change one word and commit. The tool writes the draft. You know your project, so you have the last word."</dd>
-      <dt>Narration, limit card</dt><dd class="say">"One thing it can't do for you. If you stage three unrelated changes together, it'll describe all three in one message. Splitting them into separate commits is still up to you."</dd>
-      <dt>On screen</dt><dd>Simplified VS Code, dark theme. Message field with a Generate icon, blue Commit button, two staged files (<code>checkout.js</code>, <code>errors.js</code>). Short caption per beat: Stage · Generate · Read · Adjust. Then the limit card slides in over the code area, with three files, one bundled message and the line <b>One commit, one purpose. That part is still yours.</b></dd>
-      <dt>Learner action</dt><dd>Watches. Can replay.</dd>
-      <dt>Feedback</dt><dd>None.</dd>
-      <dt class="tech">Technical notes</dt><dd class="tech">Built as timed layers from the Figma frames, synced to narration cue points (or a short MP4 recorded from the mockup, whichever is faster to update). The draft message types out character by character in Beat 3 so it reads as generated. Word swap in Beat 4 is animated. Replay button bottom right. Next unlocks when audio ends. Button name and position are placeholders until confirmed by the product team (see questions below).</dd>
-    </dl></div>
   </div>
 </section>
 
-<!-- SCREEN 4 -->
-<section class="screen" id="s4">
-  <div class="s-side">
-    <span class="s-num">SCREEN 4</span>
-    <h2>Choose the best message</h2>
-    <div class="tags"><span class="tag">40 s</span><span class="tag">Guided practice</span></div>
-  </div>
-  <div class="s-main">
-    <div class="mock">
-      <div class="file">cart.js</div>
-      <div class="del">- const maxItems = 10;</div>
-      <div class="add">+ const maxItems = 20;</div>
-      <p class="q">Same change, three messages. Which one would you commit?</p>
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">06 · Governance &amp; impact</div>
+    <h2>What the steering group sees</h2>
+    <div class="chain">
+      <div class="card"><h3><span class="dot" style="position:static;width:26px;height:26px;font-size:.75rem">1</span>Reach</h3><ul><li>Enrolment and progress by role and unit</li><li>Coverage of AI-literacy baseline</li></ul></div>
+      <div class="card"><h3><span class="dot" style="position:static;width:26px;height:26px;font-size:.75rem">2</span>Proficiency</h3><ul><li>Pre/post level against the skills map</li><li>Scenario scores, SME-reviewed evidence</li></ul></div>
+      <div class="card"><h3><span class="dot" style="position:static;width:26px;height:26px;font-size:.75rem">3</span>Adoption</h3><ul><li>Active use of approved AI tools</li><li>Use cases added to the library</li></ul></div>
+      <div class="card"><h3><span class="dot" style="position:static;width:26px;height:26px;font-size:.75rem">4</span>Impact</h3><ul><li>Time saved on target tasks</li><li>Quality of reviewed deliverables</li><li>Manager and client feedback</li></ul></div>
     </div>
-    <div class="opts">
-      <div class="opt no"><div class="k">A</div><div class="b"><code>fix(cart): update maxItems</code><p class="fb"><span class="verdict">Feedback</span>"Two things. Nothing was broken, a limit went up, so it's a feat and not a fix. And 'update maxItems' names the variable instead of saying what changed for the customer."</p></div></div>
-      <div class="opt ok"><div class="k">B</div><div class="b"><code>feat(cart): allow up to 20 items per order</code><p class="fb"><span class="verdict">Correct</span>"Yes. Right type, clear scope, and the description tells you what customers can do now."</p></div></div>
-      <div class="opt no"><div class="k">C</div><div class="b"><code>feat: change the maxItems constant in cart.js from 10 to 20 as agreed with product</code><p class="fb"><span class="verdict">Feedback</span>"Right type, but no scope, and it describes the line you edited. The part about product belongs in the message body or the pull request."</p></div></div>
+    <h3 style="margin-top:30px">Quarterly portfolio triage</h3>
+    <div class="triage">
+      <div class="card"><h3>Keep</h3><ul><li>Proficiency gains visible</li><li>Content checked in last 6 months</li></ul></div>
+      <div class="card"><h3>Refresh</h3><ul><li>Tool or regulation changed</li><li>Learners report outdated examples</li></ul></div>
+      <div class="card"><h3>Retire</h3><ul><li>Low use and no skill link</li><li>Duplicated by a better offer</li></ul></div>
+      <div class="card"><h3>Build or adopt</h3><ul><li>New gap in the skills map</li><li>Check Global / EMEA offer before building locally</li></ul></div>
     </div>
-    <div class="spec"><dl>
-      <dt>Narration</dt><dd class="say">"Here's a small change and three ways to describe it. Pick the one you'd want to find in the log a year from now."</dd>
-      <dt>On screen</dt><dd>Diff at the top, three options as cards below, Submit button.</dd>
-      <dt>Learner action</dt><dd>Selects one option and clicks Submit.</dd>
-      <dt>Feedback</dt><dd>Per option, shown above. After the correct answer, narration: <span class="serif" style="font-style:italic">"All three describe the same edit. Only one still makes sense next year."</span></dd>
-      <dt class="tech">Technical notes</dt><dd class="tech">Single-select, options shuffled. Two attempts. After the second wrong answer, B is highlighted with its explanation. Next unlocks after the correct answer is shown. Wording does not claim the tool offers several drafts, so the screen works whatever the tool's UI does.</dd>
-    </dl></div>
   </div>
 </section>
 
-<!-- SCREEN 5 -->
-<section class="screen" id="s5">
-  <div class="s-side">
-    <span class="s-num">SCREEN 5</span>
-    <h2>Fix the draft</h2>
-    <div class="tags"><span class="tag">60 s</span><span class="tag">Independent practice</span></div>
-  </div>
-  <div class="s-main">
-    <div class="mock">
-      <div class="file">auth/login.js</div>
-      <div class="add">+ &lt;input type="checkbox" id="remember-me" /&gt;</div>
-      <div class="add">+ if (rememberMe) setSessionDuration(30 * DAY);</div>
-      <p class="q">This draft needs one change before you commit. Click the part that's off.</p>
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">07 · How I would start</div>
+    <h2>First 90 days</h2>
+    <div class="plan">
+      <div class="card"><span class="mono eyebrow">Days 1–30 · Listen</span><ul><li>Interview practice leads and AI advocates in T&amp;T and SR&amp;T</li><li>Audit the current AI portfolio and Global / EMEA offer</li><li>Draft the skills map with real role titles</li></ul></div>
+      <div class="card"><span class="mono eyebrow">Days 31–60 · Prioritise</span><ul><li>Validate the map with a pilot self-assessment</li><li>Rank gaps by business priority</li><li>Agree roadmap and dashboard with the steering group</li></ul></div>
+      <div class="card"><span class="mono eyebrow">Days 61–90 · Pilot</span><ul><li>Run one role journey with a small cohort</li><li>Measure proficiency and adoption</li><li>Bring results and next choices to the steering group</li></ul></div>
     </div>
-    <div class="states">
-      <div>
-        <p class="cap">Start state · all parts look the same</p>
-        <div class="msg"><span class="neutral">fix</span><span class="neutral">(auth)</span><span class="neutral">: let users stay signed in for 30 days</span></div>
-      </div>
-      <div>
-        <p class="cap">After step 2 · corrected</p>
-        <div class="msg"><span class="right">feat</span><span class="neutral">(auth)</span><span class="neutral">: let users stay signed in for 30 days</span></div>
-      </div>
-    </div>
-    <div class="spec"><dl>
-      <dt>Narration</dt><dd class="say">"Your turn. This change adds a 'remember me' box to the login page. Here's the draft. One part needs changing before you commit. Find it."</dd>
-      <dt>On screen</dt><dd>Diff at the top. Draft message below, split into three clickable parts, all in the same neutral style so nothing gives the answer away. Step 2 appears under the message once the right part is found.</dd>
-      <dt>Learner action</dt><dd>Step 1: clicks the part that's wrong. Step 2: picks the right type from <code>feat</code> · <code>refactor</code> · <code>chore</code>.</dd>
-      <dt>Feedback</dt><dd>
-        <ul>
-          <li><b>Clicks scope:</b> "The scope is fine. This change lives in authentication. Look again."</li>
-          <li><b>Clicks description:</b> "The description works. It says what users can do now. Look again."</li>
-          <li><b>Clicks type:</b> "That's it. Nothing was broken here. So what kind of change is it?"</li>
-          <li><b>Picks feat:</b> "Right. It's a new capability. Final message: <code>feat(auth): let users stay signed in for 30 days</code>."</li>
-          <li><b>Picks refactor:</b> "A refactor changes how code is organised but not what it does. Here users get something new."</li>
-          <li><b>Picks chore:</b> "Chores are maintenance users never notice. They'll notice this one."</li>
-        </ul>
-      </dd>
-      <dt class="tech">Technical notes</dt><dd class="tech">Step 1: three labelled buttons ("type: fix", "scope: auth", "description"), unlimited attempts, each wrong click shows its hint layer. Correct click marks the type in red with the label "needs a change" and reveals step 2. Step 2: two attempts, then <code>feat</code> is shown with the explanation. The word swaps in place in the message. Closing narration after success: <span class="serif" style="font-style:italic">"Nothing was broken, so it isn't a fix. That's the check to make every time."</span> Next unlocks after that line.</dd>
-    </dl></div>
   </div>
 </section>
 
-<!-- SCREEN 6 -->
-<section class="screen" id="s6">
-  <div class="s-side">
-    <span class="s-num">SCREEN 6</span>
-    <h2>Use it on your next commit</h2>
-    <div class="tags"><span class="tag">20 s</span><span class="tag">Transfer</span><span class="tag promo">Product mention 2</span></div>
+<footer>
+  <div class="wrap">
+    <p><b style="color:var(--ink)">Mariia · Learning Designer</b> · Blended &amp; E-Learning · Adult Learning · <a href="https://5famder.github.io/">Portfolio</a></p>
+    <p>Independent concept case, created for an application to the L&amp;D AI Specialist role at Deloitte Netherlands. Built from the public vacancy only; role names, target levels and pilot data are illustrative. Not an official Deloitte document.</p>
   </div>
-  <div class="s-main">
-    <div class="cheat">
-      <span class="eyebrow">Reference card · also downloadable as PDF</span>
-      <p class="fmt">type(scope): what changed</p>
-      <div class="types">
-        <span><code>feat</code>new capability</span>
-        <span><code>fix</code>something was broken</span>
-        <span><code>refactor</code>same behaviour, different code</span>
-        <span><code>docs</code>documentation</span>
-        <span><code>test</code>tests</span>
-        <span><code>style</code>formatting only</span>
-        <span><code>chore</code>maintenance</span>
-      </div>
-      <ol class="rules">
-        <li><span>Say what changed, not which line you edited</span></li>
-        <li><span>One commit, one purpose</span></li>
-        <li><span>Write it as a command: "add", not "added"</span></li>
-      </ol>
-      <hr>
-      <p class="habit"><b>Every time:</b> generate, read, fix what's off, commit.</p>
-      <div class="cta"><span class="btn">Add to VS Code</span><span class="btn">Add to IntelliJ</span><span class="btn alt">Try it in the browser</span></div>
-    </div>
-    <div class="spec"><dl>
-      <dt>Narration</dt><dd class="say">"That's the whole habit. Generate, read, fix what's off, commit. Add the plugin to your IDE, or try it in the browser, and use it on your very next commit."</dd>
-      <dt>On screen</dt><dd>Reference card with the format, the seven types, the three rules and the habit line. Three install buttons.</dd>
-      <dt>Learner action</dt><dd>Optional: downloads the card, clicks an install link.</dd>
-      <dt>Feedback</dt><dd>None.</dd>
-      <dt class="tech">Technical notes</dt><dd class="tech">Buttons open marketplace pages in a new tab, links to be supplied by the product team. Download button for a one-page PDF of the card. Completion is sent to the LMS when this screen loads. Install clicks are tracked as an xAPI statement so we can see how many learners actually try the tool.</dd>
-    </dl></div>
-  </div>
-</section>
+</footer>
 
-<section class="block" id="review" style="border-top:1px solid var(--rule);padding-top:32px">
-  <div class="side">
-    <span class="eyebrow">Technical review</span>
-    <p>Who checked the content.</p>
-  </div>
-  <div class="body">
-    <p>The storyboard was reviewed by working developers for accuracy of the Git and Conventional Commits content and for clarity of the tasks.</p>
-    <ul class="qs">
-      <li><b>Alexandr Tsaplin</b>, Software Engineer at Pinely · <a href="https://www.linkedin.com/in/alexandrts/" target="_blank" rel="noopener" style="color:var(--accent)">LinkedIn</a></li>
-    </ul>
-  </div>
-</section>
+<button class="toggle" id="toggle" aria-label="Toggle colour theme">◐ Theme</button>
 
-<section class="block" style="border-top:1px solid var(--rule);padding-top:32px">
-  <div class="side">
-    <span class="eyebrow">Questions for the product team</span>
-    <p>What I assumed, and what I'd confirm before building.</p>
-  </div>
-  <div class="body">
-    <ol class="qs">
-      <li><b>Where is the Generate button?</b> Screen 3 uses an icon inside the VS Code message field as a placeholder. I'd need the real name and position in VS Code, IntelliJ and the web app.</li>
-      <li><b>One draft or several?</b> Screen 4 is worded so it works either way, but the demo narration should match what the tool really does.</li>
-      <li><b>Can it learn a project's own scopes,</b> for example from a commitlint config? If yes, the scope fix in screen 3 turns into a one-line setup tip, which is a nicer story for the product.</li>
-      <li><b>Which links and tracking</b> should the last screen use?</li>
-    </ol>
-  </div>
-</section>
+<script>
+const roles=["Business Consultant","Tech & Data Engineer","Risk Advisory Consultant","Deals & Transactions Analyst","Engagement Manager / Director"];
+const names=["","Aware","Practitioner","Advanced","Lead"];
+const skills=[
+ {n:"AI literacy",d:"How GenAI and LLMs work, where they fail",l:[3,4,3,3,3]},
+ {n:"Prompting & AI productivity",d:"Copilots for research, synthesis, drafting",l:[3,3,3,3,2]},
+ {n:"Responsible AI & regulation",d:"EU AI Act, confidentiality, output verification",l:[2,3,4,2,3],t:"rising"},
+ {n:"Data foundations for AI",d:"Data quality, structure, governance",l:[2,4,2,3,2]},
+ {n:"Agents & workflow automation",d:"Agent use cases, human-in-the-loop design",l:[2,4,2,2,2],t:"rising"},
+ {n:"AI solution engineering & evaluation",d:"RAG, testing, model evaluation, MLOps",l:[1,4,2,1,1],t:"rising"},
+ {n:"Use-case discovery & value case",d:"Find, size and prioritise AI use cases",l:[4,2,2,3,4]},
+ {n:"AI change & client advisory",d:"Adoption, stakeholder buy-in, advising clients",l:[3,2,3,2,4]}
+];
+const body=document.getElementById("matrix-body");
+skills.forEach(s=>{
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td class="skill"><b>${s.n}${s.t?'<span class="tag">'+s.t+'</span>':''}</b><span>${s.d}</span></td>`+
+    s.l.map((v,i)=>`<td class="lv lv${v}" title="${roles[i]} · ${s.n}: ${names[v]}">${v}<i>${names[v]}</i></td>`).join("");
+  body.appendChild(tr);
+});
 
-<div class="notes">
-  <section>
-    <span class="eyebrow">Accessibility</span>
-    <p>Colour never carries meaning on its own. Segments on screens 2 and 5 have numbers or text labels too, and the warning on the limit card has an icon and a heading. Everything clickable is a real button that works by keyboard, in reading order. Narration is captioned, and the lesson works with the sound off, because each narrated point also shows up on screen as a keyword or a code sample. Code is live text, not images, so screen readers can read it and it scales without blurring.</p>
-  </section>
-  <section>
-    <span class="eyebrow">Production and evaluation</span>
-    <p>Built in Storyline 360 rather than Rise, because screens 1 and 5 need state changes and a two-step interaction that Rise blocks can't handle cleanly. Estimate: 6 to 8 hours plus narration recording. Screen 3 is the only custom animation, made from the Figma frames in the VS Code Dark+ palette. To see whether it worked, I'd look at first-try accuracy on screen 5 and at how many learners click an install button.</p>
-    <div class="swatches">
-      <span class="sw"><i style="background:#1E1E1E"></i>#1E1E1E</span>
-      <span class="sw"><i style="background:#252526"></i>#252526</span>
-      <span class="sw"><i style="background:#CCCCCC"></i>#CCCCCC</span>
-      <span class="sw"><i style="background:#0E639C"></i>#0E639C</span>
-      <span class="sw"><i style="background:#81B88B"></i>#81B88B</span>
-      <span class="sw"><i style="background:#D7BA7D"></i>#D7BA7D</span>
-    </div>
-  </section>
-</div>
+const gaps=[["Responsible AI & regulation",1.8,4],["AI literacy",2.4,3],["Prompting & AI productivity",2.6,3],["Agents & workflow automation",1.2,2],["AI change & client advisory",2.1,3]];
+document.getElementById("gap").innerHTML='<div><span class="mono muted">Risk Advisory · current avg vs target</span>'+gaps.map(g=>
+ `<div class="bar"><div class="lbl"><span>${g[0]}</span><span class="muted">${g[1].toFixed(1)} / ${g[2]}</span></div><div class="track"><div class="fill" style="width:${g[1]/4*100}%"></div><div class="target" style="left:calc(${g[2]/4*100}% - 2px)"></div></div></div>`
+).join("")+'<p class="muted" style="font-size:.8rem;margin-top:10px">Teal = current average (n≈40, illustrative) · amber marker = target level</p></div>';
 
-<p class="foot">Storyboard by Mariia Mukhina · Product and scenario per the assignment brief · Drafted with AI assistance; learning design decisions, review and Figma frames by the author.</p>
-</div>
+const journeys=[
+ {role:"Risk Advisory Consultant",unit:"SR&T",title:"From AI user to trusted AI-risk advisor",len:"12 weeks · ~2 h/week",focus:["Responsible AI","Output verification","Agents"],
+  phases:[
+   ["Diagnose","Week 0","20-min self-assessment against the skills map + manager calibration","Personal path; modules already mastered are skipped","Gap profile"],
+   ["Foundations","Weeks 1–2","3 × 15-min microlearning on how LLMs work and fail","Scenario: review an AI-drafted risk memo and spot invented regulations and leaked client data","Scenario score"],
+   ["Apply on own work","Weeks 3–5","90-min prompt lab with approved firm tools","Redo one real control-testing or policy-review task with AI; log time and quality; pair review","Before/after workpaper"],
+   ["Responsible AI deep dive","Weeks 6–8","Two live cohort workshops (2 h each)","Classify client AI systems by EU AI Act risk tier; draft an AI risk-assessment checklist","Checklist reviewed by SME"],
+   ["Agents, safely","Weeks 9–11","Sandbox + coaching by an AI Advocate","Map an evidence-collection process: where an agent helps, where human review is mandatory","Workflow canvas"],
+   ["Show & share","Week 12","10-min showcase to the practice community","Present the use case; add it to the library; option to become an AI Advocate","Badge + library entry"]
+  ]},
+ {role:"Deals & Transactions Analyst",unit:"SR&T",title:"AI for faster, safer due diligence",len:"8 weeks · ~2 h/week",focus:["AI productivity","Data foundations","Verification"],
+  phases:[
+   ["Diagnose","Week 0","Self-assessment + manager calibration","Personal path","Gap profile"],
+   ["Foundations & confidentiality","Weeks 1–2","Fast-track AI literacy + data-room confidentiality rules","Scenario: decide which documents may go into which tool","Scenario score"],
+   ["Trust but verify","Weeks 3–4","Practice on a synthetic data room","Summarise documents and extract red flags with AI, then trace every claim back to the source","Verified red-flag log"],
+   ["Data for analysis","Weeks 5–6","Guided exercises in a sandbox","Clean and structure messy financial data; spot data-quality traps before AI analysis","Data-quality checklist"],
+   ["Show & share","Weeks 7–8","Red-flag challenge, peer-scored","Teams compete on accuracy and speed; best workflows go into the library","Badge + library entry"]
+  ]},
+ {role:"Business Consultant",unit:"T&T",title:"From AI user to AI use-case finder",len:"10 weeks · ~2 h/week",focus:["Use-case discovery","AI change","Productivity"],
+  phases:[
+   ["Diagnose","Week 0","Self-assessment + manager calibration","Personal path","Gap profile"],
+   ["AI-powered consulting basics","Weeks 1–2","Microlearning + prompt lab","Use copilots for desk research, interview synthesis and slide storylines on a current project","Before/after deliverable"],
+   ["Use-case discovery sprint","Weeks 3–5","Live workshop + client-style case","Run a discovery workshop; score use cases on value vs feasibility; build a simple value case","Prioritised use-case canvas"],
+   ["Leading AI adoption","Weeks 6–8","Role-play with an AI-simulated client stakeholder","Design an adoption plan for an AI tool rollout and handle resistance in conversation","Adoption plan + feedback"],
+   ["Show & share","Weeks 9–10","Pitch to a panel of managers","Pitch one use case with its value case; best pitches feed the practice offering","Badge + library entry"]
+  ]}
+];
+const tabs=document.getElementById("tabs"), panel=document.getElementById("journey");
+function render(i){
+  [...tabs.children].forEach((b,k)=>b.setAttribute("aria-selected",k===i));
+  const j=journeys[i];
+  panel.innerHTML=`<div class="jhead"><div><span class="mono eyebrow">${j.unit} · ${j.role}</span><h3 style="font-size:1.5rem;margin-top:4px">${j.title}</h3><p class="muted" style="margin:4px 0 0">${j.len}</p></div><div class="chips">${j.focus.map(f=>`<span class="chip">${f}</span>`).join("")}</div></div>
+  <ol class="phases">${j.phases.map((p,k)=>`<li><span class="dot">${k}</span><div class="ph-top"><h3>${p[0]}</h3><span class="when">${p[1]}</span></div>
+  <div class="ph-grid"><div><b>Format</b>${p[2]}</div><div><b>Practice task</b>${p[3]}</div><div><b>Evidence</b>${p[4]}</div></div></li>`).join("")}</ol>`;
+}
+journeys.forEach((j,i)=>{const b=document.createElement("button");b.setAttribute("role","tab");b.textContent=j.role;b.onclick=()=>render(i);tabs.appendChild(b);});
+render(0);
+
+const root=document.documentElement;
+document.getElementById("toggle").onclick=()=>{
+  const dark=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme=dark?"light":"dark";
+};
+</script>
 </body>
 </html>
