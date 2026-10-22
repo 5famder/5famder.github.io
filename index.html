@@ -10,26 +10,28 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://5famder.github.io/">
 <meta property="og:image" content="https://5famder.github.io/photo.jpg">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%231B1A17'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='700' fill='%23ECEBE6' text-anchor='middle'%3EMM%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%234A2E22'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='700' fill='%23CFE4DF' text-anchor='middle'%3EMM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Oswald:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Bowlby+One&display=swap">
 <style>
 :root{
-  --bg:#DEDDD7; --surface:#ECEBE6; --ink:#1B1A17; --muted:#4A4843; --faint:#6A6760; --rule:#C6C4BC;
-  --accent:#1B1A17; --accent-ink:#ECEBE6; --lav:#D3D1C9; --lav2:#BDBAB0;
-  --moss:#4D5A39; --moss-soft:#D5D9C8;
-  --t1:#D5D9C8; --t1i:#3E4A2D; --t2:#E6D9C3; --t2i:#6B4A1A;
-  --shadow:0 18px 40px rgba(27,26,23,.08),0 3px 10px rgba(27,26,23,.05);
-  --display:"Oswald","Arial Narrow",Impact,sans-serif;
+  --bg:#F3ECCB; --surface:#FBF6E4; --ink:#3B261C; --muted:#5E4A3E; --faint:#7D695C; --rule:#DCCDA2;
+  --accent:#4A2E22; --accent-ink:#F7F0D4; --lav:#CFE4DF; --lav2:#AFD2CB;
+  --mint:#CFE4DF; --butter:#F3ECCB; --choc:#4A2E22;
+  --moss:#4D5A39; --moss-soft:#CFE4DF;
+  --t1:#CFE4DF; --t1i:#2F5E55; --t2:#F2DDB4; --t2i:#8A5A1A;
+  --shadow:0 18px 40px rgba(59,38,28,.10),0 3px 10px rgba(59,38,28,.06);
+  --display:"Bowlby One","Arial Black",Impact,sans-serif;
   --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
 }
 @media (prefers-color-scheme: dark){
   :root{color-scheme:dark;
-    --bg:#171715; --surface:#21211E; --ink:#ECEBE6; --muted:#B3B0A7; --faint:#8F8C83; --rule:#36352F;
-    --accent:#ECEBE6; --accent-ink:#171715; --lav:#2C2B27; --lav2:#45433C;
-    --moss:#AEBC92; --moss-soft:#2A3021;
-    --t1:#2A3021; --t1i:#AEBC92; --t2:#3A2F1E; --t2i:#E0BE86; --shadow:0 18px 40px rgba(0,0,0,.4);}
+    --bg:#22170F; --surface:#2F2117; --ink:#F3ECCB; --muted:#CDBFA6; --faint:#A8977F; --rule:#4A3628;
+    --accent:#CFE4DF; --accent-ink:#22170F; --lav:#2B3A36; --lav2:#3C524C;
+    --mint:#2B3A36; --butter:#2F2117; --choc:#1A110B;
+    --moss:#AEBC92; --moss-soft:#2B3A36;
+    --t1:#2B3A36; --t1i:#9FD3C8; --t2:#3A2C1A; --t2i:#E9BE7A; --shadow:0 18px 40px rgba(0,0,0,.4);}
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -225,6 +227,56 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 @media (max-width:900px){.gallery{grid-template-columns:1fr 1fr}.edu{grid-template-columns:1fr}.proc{grid-template-columns:1fr}}
 @media (max-width:640px){.projects,.gallery{grid-template-columns:1fr}.lang{grid-template-columns:repeat(2,1fr)}}
+
+/* ===== Retro theme: mint · butter · chocolate ===== */
+.brand,.hero h1,.facts b,.card-me h2,.sec-h h2,.proj h3,.step .n,.step h3,.ai h3,.fig h3,.panel h3,.case-hero h2,.glance b,.cs h3,.days5 b,.dec b,.cta h2{font-weight:400;letter-spacing:-.01em}
+.hero h1,.sec-h h2,.proj h3,.step h3,.ai h3,.fig h3,.panel h3,.case-hero h2,.cs h3,.card-me h2,.cta h2{text-transform:none}
+.brand{font-size:17px;letter-spacing:.01em}
+.brand::before{background:var(--accent)}
+/* hero as a "cover slide" */
+.hero{background:var(--mint);border-bottom:0}
+.hero-in{padding-block:40px 0}
+.hey{display:inline-block;align-self:flex-start;background:var(--accent);color:var(--accent-ink);font-family:Inter,sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border-radius:999px;transform:rotate(-3deg)}
+.hero h1{font-size:clamp(40px,6.2vw,80px);line-height:.98;color:var(--ink)}
+.hero h1 .it{font-size:.62em;margin:.12em 0 .1em;color:var(--muted)}
+.hero .lead{color:var(--muted)}
+.arch{background:var(--butter);border:6px solid var(--accent);border-bottom:0}
+.facts{background:var(--choc);color:#F7F0D4;border-top:0;border-radius:24px 24px 0 0;padding-inline:24px}
+.facts div{border-right-color:rgba(247,240,212,.18)}
+.facts b{color:#CFE4DF;font-size:15px}
+.facts p{color:rgba(247,240,212,.82)}
+@media (max-width:820px){.facts div:nth-child(-n+2){border-bottom-color:rgba(247,240,212,.18)}}
+.tabs{background:color-mix(in srgb,var(--bg) 90%,transparent)}
+/* headings */
+.sec-h h2{font-size:clamp(34px,4.4vw,54px);color:var(--ink)}
+.sec-h p{color:var(--muted)}
+/* project cards as alternating slides */
+.projects{gap:24px}
+.proj{background:var(--mint);border-radius:28px;padding:18px 18px 24px}
+.proj:nth-child(4n+2),.proj:nth-child(4n+3){background:var(--surface)}
+.proj{min-width:0}
+.proj .thumb{border-radius:18px}
+@media (max-width:640px){.projects{grid-template-columns:minmax(0,1fr)}.proj{padding:12px 12px 20px}.t-map{padding:16px;gap:4px}.t-map span{height:16px}.t-map b{line-height:16px;font-size:9px}}
+.proj .pbody{padding-inline:6px}
+.proj h3{font-size:26px;line-height:1.08}
+.tools span{background:color-mix(in srgb,var(--surface) 70%,transparent)}
+.t-api{background:#2E1F17}
+.t-map{background:var(--choc);display:grid;grid-template-columns:auto repeat(5,1fr);gap:6px;padding:26px 28px;align-content:center}
+.t-map span{height:22px;border-radius:6px}
+.t-map b{font:600 10px/22px Inter,sans-serif;color:rgba(247,240,212,.7);white-space:nowrap;padding-right:6px}
+.t-map .a{background:#E8F2EF}.t-map .b{background:#A9D3CA}.t-map .c{background:#5FAE9F}.t-map .d{background:#E9A23B}
+/* other blocks */
+.ai,.dec div,.days5 div,.persona{background:var(--mint)}
+.step .n{color:var(--accent)}
+.panel h3{border-bottom:3px solid var(--accent)}
+.step-k{border-top:3px solid var(--accent)}
+/* closing slide */
+.cta{background:var(--choc);color:#F7F0D4;border-radius:28px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:56px}
+.cta h2{font-family:var(--display);font-size:clamp(38px,6vw,76px);line-height:.95;color:#F7F0D4;max-width:12ch}
+.cta p{font-family:var(--serif);font-size:20px;color:rgba(247,240,212,.8);margin-top:12px;max-width:36ch}
+.cta .pill{background:#CFE4DF;color:#3B261C}
+.cta .pill .arr{background:#3B261C;color:#CFE4DF}
+footer{border-top:0}
 </style>
 </head>
 <body>
@@ -278,8 +330,26 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <!-- WORK -->
 <section class="tab" id="work" data-tab>
-  <div class="sec-h"><h2>Selected work</h2><p>Five projects: three on AI and developer tools, two on preparing frontline staff. Each one opens in the browser, no sign-up needed.</p></div>
+  <div class="sec-h"><h2>Selected work</h2><p>Six projects: one on building AI skills across a firm, three on AI and developer tools, two on preparing frontline staff. Each one opens in the browser, no sign-up needed.</p></div>
   <div class="projects">
+
+    <article class="proj">
+      <div class="thumb t-map" aria-hidden="true">
+        <b>AI literacy</b><span class="c"></span><span class="d"></span><span class="c"></span><span class="c"></span><span class="c"></span>
+        <b>Responsible AI</b><span class="b"></span><span class="c"></span><span class="d"></span><span class="b"></span><span class="c"></span>
+        <b>Agents</b><span class="b"></span><span class="d"></span><span class="b"></span><span class="b"></span><span class="b"></span>
+        <b>Use cases</b><span class="d"></span><span class="b"></span><span class="b"></span><span class="c"></span><span class="d"></span>
+        <b>AI change</b><span class="c"></span><span class="b"></span><span class="c"></span><span class="b"></span><span class="d"></span>
+      </div>
+      <div class="pbody">
+        <span class="kind">L&amp;D strategy · Consultants</span>
+        <h3>AI Skills Map &amp; Learning Journeys</h3>
+        <p>A skills map for five consulting roles, three role-based AI learning journeys, and the measures a steering group needs to keep the learning offer current.</p>
+        <span class="status wip">Concept project · skills mapping and portfolio design</span>
+        <div class="tools"><span>Skills matrix</span><span>Learning journeys</span><span>70-20-10</span><span>LTEM</span><span>Governance</span></div>
+        <div class="plinks"><a class="btn" href="https://5famder.github.io/ai-skills-map-consulting/">Open case</a></div>
+      </div>
+    </article>
 
     <article class="proj">
       <div class="thumb t-api" aria-hidden="true"><div><span class="c"># Your first inference request</span><br><span class="k">from</span> openai <span class="k">import</span> OpenAI<br>client = OpenAI(<br>&nbsp;&nbsp;base_url=<span class="s">"…tokenfactory…/v1/"</span>,<br>&nbsp;&nbsp;api_key=os.environ[<span class="s">"NEBIUS_API_KEY"</span>])<br><span class="c"># finish_reason: "stop" · 60 tokens</span></div></div>
@@ -857,6 +927,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     </div>
   </div>
 </section>
+
+<aside class="cta">
+  <div>
+    <h2>Let’s work together?</h2>
+    <p>I’m looking for a team where I can design learning that changes how people work.</p>
+  </div>
+  <button class="pill" type="button" data-contact aria-haspopup="dialog" aria-controls="meCard">Contact me <span class="arr" aria-hidden="true">→</span></button>
+</aside>
 
 </main>
 
